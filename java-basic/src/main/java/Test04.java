@@ -1,4 +1,4 @@
-
+package main.java;
 
 public class Test04 {} 
 class My12 {}
