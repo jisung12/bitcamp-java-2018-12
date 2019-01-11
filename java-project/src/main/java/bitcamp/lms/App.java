@@ -1,63 +1,43 @@
 package bitcamp.lms;
-
 import java.sql.Date;
+import java.util.Scanner;
 
 public class App {
+
+  static Scanner keyboard = new Scanner(System.in);
+  static int i = 0;
+
   public static void main(String[] args) {
-    java.util.Scanner keyboard = new java.util.Scanner(System.in);
 
-    int[] number = new int[100];
-    String[] subName = new String[100];
-    String[] subCon = new String[100];
-    Date[] startDate = new Date[100];
-    Date[] endDate = new Date[100];
-    int[] totalTime = new int[100];
-    int[] dateTime = new int[100];
-
-    int index = 0;
-
-    while(index < 100) {
-      System.out.print("번호? ");
-      number[index] = Integer.parseInt(keyboard.nextLine()); 
-
-      System.out.print("수업명? ");
-      subName[index] = keyboard.nextLine();
-
-      System.out.print("수업내용? ");
-      subCon[index] = keyboard.nextLine();
-
-      System.out.print("시작일? ");
-      startDate[index] = Date.valueOf(keyboard.nextLine()); 
-
-      System.out.print("종료일? ");
-      endDate[index] =  Date.valueOf(keyboard.nextLine());
-
-      System.out.print("총수업시간? ");
-      totalTime[index] = Integer.parseInt(keyboard.nextLine());
-
-      System.out.print("일수업시간? ");
-      dateTime[index] = Integer.parseInt(keyboard.nextLine());
-
-      index++;
-
-      System.out.print("\n계속 입력하시겠습니까?(Y/n) \n");
-      String input = keyboard.nextLine();
-
-      if(!input.equalsIgnoreCase("y") && !input.equals("") )
+    while(i<Lesson.LENGTH) {
+      System.out.print("명령> ");
+      String cmd = keyboard.nextLine();
+      if(cmd.equals("/lesson/add")) {    
+        addLesson();
+      } else if(cmd.equals("/lesson/list")){
+        listLesson();
+      } else if(cmd.equals("quit")) {
+        System.out.println("종료");
         break;
-    } //whlie1
+      } else {
+        System.out.println("잘못입력하셨습니다.");
+      }
+      System.out.println();
 
-    keyboard.close();  
+    }//while
+    System.out.println();
+    keyboard.close();
+  }//main
 
-    int count = 0;
+  
 
-    while(count < index) {
-      System.out.printf("%d. %-20s, %s ~ %s, %4d\n",
-          number[count],subName[count], startDate[count] ,endDate[count], totalTime[count]);
-      count++;
-    }
+  public static void listLesson() {
+    for(int j=0; j<i; j++) {
 
-
-
-  }  
-}
+      System.out.printf("번호? %d\n수업명? %s\n수업내용? %s\n기간: %s ~ %s\n총수업시간: %d시간\n일수업시간: %d시간\n",
+          Lesson.no[j], Lesson.title[j], Lesson.contents[j],
+          Lesson.startDate[j], Lesson.endDate[j], Lesson.totalHours[j], Lesson.dayHours[j]);
+    } 
+  }//listLesson
+  
+}//app

@@ -1,54 +1,32 @@
 package bitcamp.lms;
+
 import java.sql.Date;
 import java.util.Scanner;
 
 public class App3 {
+
   public static void main(String[] args) {
     Scanner keyboard = new Scanner(System.in);
-    
-     int Length = 100;
-     int i = 0;
-     
-     int num[] = new int[Length];
-     String content[] = new String[Length];
-    
-    while(i < Length) { 
+
     System.out.print("번호? ");
-    num[i] = Integer.parseInt(keyboard.nextLine());
+    int no = Integer.parseInt(keyboard.nextLine());
     
     System.out.print("내용? ");
-    content[i] = keyboard.nextLine();
+    String contents = keyboard.nextLine();
     
-    i++;
+    Date createdDate = new Date(System.currentTimeMillis()); 
     
-    System.out.println("계속입력하시겠습니까?(Y/N)");
+    int viewCount = 0;
     
-    String str = keyboard.nextLine().toLowerCase();
-    
-    
-    if(!str.equals("Y") && !str.equals("y")) {
-      break;
-    } else if(str.equals("Y")||str.equals("y")) {
-      continue;
-    }
-    
-    
-    } //while
-    
-    
+    // 사용후 스캐너 객체의 자원을 해제한다.
     keyboard.close();
     
-   
+    System.out.println(); // 빈 줄 출력
     
-    Date writeDate = new Date(System.currentTimeMillis());
-    
-    for(int k=0; k<i; k++) {
-      System.out.printf("%d. ", num[k]);
-      System.out.printf("%s, ", content[k]);
-      System.out.printf("%s", writeDate );
-      System.out.println();
-       }
-    
-    
+    System.out.printf("번호: %d\n", no);
+    System.out.printf("내용: %s\n", contents);
+    System.out.printf("작성일: %s\n", createdDate);
+    System.out.printf("조회수: %d\n", viewCount);
   }
 }
+

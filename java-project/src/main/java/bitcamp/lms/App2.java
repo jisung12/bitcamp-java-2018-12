@@ -3,62 +3,42 @@ import java.sql.Date;
 import java.util.Scanner;
 
 public class App2 {
+
   public static void main(String[] args) {
+    
     Scanner keyboard = new Scanner(System.in);
-    
-    int Length = 100;
-    int i = 0;
-    
-    int num[] = new int[Length];
-    String name[] = new String[Length];
-    String email[] = new String[Length];
-    String phone[] = new String[Length];
-    
-    
-    
-    while(i < Length) {
+
     System.out.print("번호? ");
-    num[i] = Integer.parseInt(keyboard.nextLine());
+    int no = Integer.parseInt(keyboard.nextLine());
     
     System.out.print("이름? ");
-    name[i] = keyboard.nextLine();
+    String name = keyboard.nextLine();
     
     System.out.print("이메일? ");
-    email[i] = keyboard.nextLine();
+    String email = keyboard.nextLine();
     
+    System.out.print("암호? ");
+    String password = keyboard.nextLine();
+
+    System.out.print("사진? ");
+    String photo = keyboard.nextLine();
+
     System.out.print("전화? ");
-    phone[i] = keyboard.nextLine();
-    
-    System.out.println();
-    
-    i++;
-    
-    System.out.println("계속입력하시겠습니까?(Y/N)");
-    
-    String str = keyboard.nextLine().toLowerCase();
-    
-    if(!str.equals("Y") && !str.equals("y")) {
-      break;
-    } else if(str.equals("Y") || str.equals("y")) {
-      continue;
-    }
-    System.out.println();
-   }
-    
+    String tel = keyboard.nextLine();
+
+    Date registeredDate = new Date(System.currentTimeMillis()); 
+        
+    // 사용후 스캐너 객체의 자원을 해제한다.
     keyboard.close();
     
-    Date registeredDate = new Date(System.currentTimeMillis());
+    System.out.println(); // 빈 줄 출력
     
-    for(int k=0; k<i; k++) {
-      System.out.printf("%d. ", num[k]);
-      System.out.printf("%s, ", name[k]);
-      System.out.printf("%s, ", email[k]);
-      System.out.printf("%s, ", phone[k]);
-      System.out.printf("%s ", registeredDate);
-      System.out.println();
-    }
-    
-    
- 
-  }  
+    System.out.printf("번호: %d\n", no);
+    System.out.printf("이름: %s\n", name);
+    System.out.printf("이메일: %s\n", email);
+    System.out.printf("암호: %s\n", password);
+    System.out.printf("사진: %s\n", photo);
+    System.out.printf("전화: %s\n", tel);
+    System.out.printf("가입일: %s\n", registeredDate);
+  }
 }
