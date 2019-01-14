@@ -7,8 +7,21 @@ public class Test01 {
     System.out.println(5 - 2);
     System.out.println(5 * 2);
     System.out.println(5 / 2);
-    System.out.println(5 % 2);    
+    System.out.println(5 % 2);
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

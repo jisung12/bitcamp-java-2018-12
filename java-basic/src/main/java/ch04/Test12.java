@@ -1,4 +1,4 @@
-// 논리 연산자 -   &&, ||   vs   &, |
+// &&, || vs &, |
 package ch04;
 
 public class Test12 {
@@ -7,13 +7,13 @@ public class Test12 {
     int a = 5;
     int r = 10 / (a = 2);
     System.out.printf("%d, %d\n", a, r);
-    // r = 10 / (a=2)
-    // r = 10 / (a 변수에 2를 저장)
-    // r = 10 / (a 변수에 값을 리턴)
-    // r = 10 / 2 
+    // r = 10 / (a = 2)
+    // r = 10 / (a 변수에 2를 저장한다)
+    // r = 10 / (a 변수의 값을 리턴한다)
+    // r = 10 / 2
     // r = 5
     
-    // &&와 &의 차이점
+    // && 와 &의 차이점
     boolean b1 = true;
     boolean b2 = false && (b1 = false);
     System.out.printf("b1=%b, b2=%b\n", b1, b2);
@@ -31,6 +31,22 @@ public class Test12 {
     b1 = true;
     b2 = true | (b1 = false);
     System.out.printf("b1=%b, b2=%b\n", b1, b2);
-    
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
