@@ -13,19 +13,11 @@ public class App {
 
   public static void main(String[] args) {
     
-    BoardHandler boardHandler = new BoardHandler();
-    boardHandler.keyboard = keyboard;
-    
-    BoardHandler boardHandler2 = new BoardHandler();
-    boardHandler2.keyboard = keyboard;
-    
-    LessonHandler lessonHandler = new LessonHandler();
-    lessonHandler.keyboard = keyboard;
-    
-    MemberHandler memberHandler = new MemberHandler();
-    memberHandler.keyboard = keyboard;
-   
-    
+    BoardHandler boardHandler = new BoardHandler(keyboard);
+    BoardHandler boardHandler2 = new BoardHandler(keyboard);
+    LessonHandler lessonHandler = new LessonHandler(keyboard);
+    MemberHandler memberHandler = new MemberHandler(keyboard);
+ 
     while (true) {
       String command = prompt();
 

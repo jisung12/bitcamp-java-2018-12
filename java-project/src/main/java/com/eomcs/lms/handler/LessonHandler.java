@@ -8,9 +8,15 @@ public class LessonHandler {
 
   final int LENGTH = 10;
 
-  public Scanner keyboard;
+  Scanner keyboard;
+  
   Lesson[] lessons = new Lesson[LENGTH];
   int lessonIdx = 0;
+  
+  public LessonHandler(Scanner keyboard){
+    this.keyboard = keyboard;
+  }
+  
   
   public void listLesson() {
     for (int j = 0; j < this.lessonIdx; j++) {

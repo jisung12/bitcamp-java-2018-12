@@ -23,7 +23,7 @@ class Monitor9 { // 기본값으로 초기화
     System.out.println("Monitor9(int, int)");
   }
   
-  Monitor9(int bright, int contrast, int widthREs, int heightRes) {
+  Monitor9(int bright, int contrast, int widthRes, int heightRes) {
     this.bright = bright;
     this.contrast = contrast;
     this.widthRes = widthRes;
@@ -42,7 +42,7 @@ public class Test11 {
     // 인스턴스 생성
    
     // 생성자를 지정할 때 파라미터의 값에 따라 결정된다.
-    new Monitor9(); // 기본 생성자를 지정한다,
+    new Monitor9(); // 기본 생성자를 지정한다.
     new Monitor9(50, 50); // Monitor9(int, int) 생성자를 지정.
     new Monitor9(50, 50, 1920, 1080); //Monitor9(int, int, int, int) 생성자를 지정
     

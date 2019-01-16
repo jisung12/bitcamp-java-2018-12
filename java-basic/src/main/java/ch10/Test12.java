@@ -29,14 +29,11 @@ class Monitor10 {
     System.out.println("Monitor10(int, int, int, int)");
   }
   
-  
-  
   public void on() {
     // 주의!
     // 일반 메서드는 생성자를 호출할 수 없다! **
     //this();  컴파일 오류!
-    
-    
+      
     System.out.println("화면을 출력한다.");
   }
 }

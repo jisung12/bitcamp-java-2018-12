@@ -10,11 +10,17 @@ public class BoardHandler {
 
   static final int LENGTH = 10;
 
-  public Scanner keyboard;
+  Scanner keyboard;
 
   Board[] boards = new Board[LENGTH];
   int boardIdx = 0;
 
+  public BoardHandler(Scanner keyboard){
+    this.keyboard = keyboard;
+  }
+  
+  
+  
   public void listBoard() {
     for (int j = 0; j < this.boardIdx; j++) {
       System.out.printf("%3d, %-20s, %s, %d\n", 
