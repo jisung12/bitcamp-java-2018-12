@@ -6,54 +6,49 @@ import com.eomcs.lms.domain.Lesson;
 
 public class LessonHandler {
 
-  final int LENGTH = 10;
-
   Scanner keyboard;
+  ArrayList<Lesson> list;
   
-  Lesson[] lessons = new Lesson[LENGTH];
-  int lessonIdx = 0;
-  Lesson lesson = new Lesson();
-  
-  public LessonHandler(Scanner keyboard){
+  public LessonHandler(Scanner keyboard) {
     this.keyboard = keyboard;
+    list = new ArrayList<>(20);
   }
   
- 
-  
   public void listLesson() {
-    for (int j = 0; j < this.lessonIdx; j++) {
+    Lesson[] lessons = list.toArray(new Lesson[0]);
+    for (Lesson lesson : lessons) {
+     
       System.out.printf("%3d, %-15s, %10s ~ %10s, %4d\n", 
-          this.lessons[j].getNo(), this.lessons[j].getTitle(), this.lessons[j].getStartDate(), 
-          this.lessons[j].getEndDate(), this.lessons[j].getTotalHours());
+          lesson.getNo(), lesson.getTitle(), 
+          lesson.getStartDate(), lesson.getEndDate(), lesson.getTotalHours());
     }
   }
 
   public void addLesson() {
+    Lesson lesson = new Lesson();
 
     System.out.print("번호? ");
-    lesson.setNo(Integer.parseInt(this.keyboard.nextLine()));
+    lesson.setNo(Integer.parseInt(keyboard.nextLine()));
 
     System.out.print("수업명? ");
-    lesson.setTitle(this.keyboard.nextLine());
+    lesson.setTitle(keyboard.nextLine());
 
     System.out.print("설명? ");
-    lesson.setContents(this.keyboard.nextLine());
+    lesson.setContents(keyboard.nextLine());
 
     System.out.print("시작일? ");
-    lesson.setStartDate(Date.valueOf(this.keyboard.nextLine()));
+    lesson.setStartDate(Date.valueOf(keyboard.nextLine()));
 
     System.out.print("종료일? ");
-    lesson.setEndDate(Date.valueOf(this.keyboard.nextLine()));
+    lesson.setEndDate(Date.valueOf(keyboard.nextLine()));
 
     System.out.print("총수업시간? ");
-    lesson.setTotalHours(Integer.parseInt(this.keyboard.nextLine()));
+    lesson.setTotalHours(Integer.parseInt(keyboard.nextLine()));
 
     System.out.print("일수업시간? ");
-    lesson.setDayHours(Integer.parseInt(this.keyboard.nextLine()));
+    lesson.setDayHours(Integer.parseInt(keyboard.nextLine()));
 
-    // i 번째 배열에 수업 정보를 담고 있는 Lesson 객체(의 주소)를 보관한다.
-    this.lessons[lessonIdx] = lesson;
-    this.lessonIdx++;
+    list.add(lesson);
 
     System.out.println("저장하였습니다.");
   }
