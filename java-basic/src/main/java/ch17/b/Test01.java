@@ -1,4 +1,4 @@
-// 가은 타입으로 묶지 않았을 때 
+// 같은 타입으로 묶지 않았을 때 
 package ch17.b;
 
 import ch17.c.BubbleSort;
