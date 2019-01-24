@@ -1,14 +1,16 @@
 package com.eomcs.lms.domain;
-
 import java.sql.Date;
 
-public class Board {
+public class Board implements Cloneable {
   private int no;
   private String contents;
   private Date createdDate;
   private int viewCount;
   
-  
+  @Override
+  public Board clone() throws CloneNotSupportedException {
+    return (Board) super.clone();
+  }
   
   public int getNo() {
     return no;
@@ -34,4 +36,6 @@ public class Board {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
+  
+  
 }

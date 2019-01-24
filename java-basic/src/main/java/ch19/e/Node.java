@@ -1,4 +1,4 @@
-package algorithm.data_structure.linkedlist;
+package ch19.e;
 
 // LinkedList에서 다룰 데이터를 담는 그릇이다.
 // 

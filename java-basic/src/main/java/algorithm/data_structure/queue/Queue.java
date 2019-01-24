@@ -16,13 +16,14 @@ public class Queue extends LinkedList{
   public Object poll() {
     //상속 받은 메서드를 사용하여 값을 꺼내기.
     return this.remove(0);
+  
   }
   
   
   
   public boolean empty() {
     //상속 받은 필드나 메서드를 사용하여 값을 리턴.
-    return this.size == 0;
+    return size == 0;
   }
   
   
