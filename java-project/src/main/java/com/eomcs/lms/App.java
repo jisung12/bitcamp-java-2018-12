@@ -1,10 +1,16 @@
 package com.eomcs.lms;
 
 import java.util.Scanner;
+import com.eomcs.lms.domain.Lesson;
+import com.eomcs.lms.domain.Member;
 import com.eomcs.lms.handler.BoardHandler;
 import com.eomcs.lms.handler.LessonHandler;
 import com.eomcs.lms.handler.MemberHandler;
+import com.eomcs.util.ArrayList;
+import com.eomcs.util.LinkedList;
+import com.eomcs.util.Queue;
 import com.eomcs.util.Stack;
+import com.eomcs2.lms.domain.Board;
 
 
 public class App {
@@ -13,13 +19,20 @@ public class App {
 
   // 사용자가 입력한 명령을 보관할 스택 준비.
   static Stack<String> commandHistory = new Stack<>();
+  static Queue<String> commandHistory2 = new Queue<>();
 
   public static void main(String[] args) {
-
-    LessonHandler lessonHandler = new LessonHandler(keyboard);
-    MemberHandler memberHandler = new MemberHandler(keyboard);
-    BoardHandler boardHandler1 = new BoardHandler(keyboard);
-    BoardHandler boardHandler2 = new BoardHandler(keyboard);
+ /*
+    ArrayList<Lesson> lessonList = new ArrayList<>();
+    ArrayList<Member> memberList = new ArrayList<>();
+    LinkedList<Board> boardList1 = new LinkedList<>();
+    LinkedList<Board> boardList2 = new LinkedList<>();
+    */
+    
+    LessonHandler lessonHandler = new LessonHandler(keyboard, new ArrayList<>());
+    MemberHandler memberHandler = new MemberHandler(keyboard, new ArrayList<>());
+    BoardHandler boardHandler1 = new BoardHandler(keyboard, new LinkedList<>());
+    BoardHandler boardHandler2 = new BoardHandler(keyboard, new LinkedList<>());
 
 
     while (true) {
@@ -27,6 +40,9 @@ public class App {
 
       // 사용자가 입력한 명령을 스택에 보관한다.
       commandHistory.push(command);
+      
+      // 사용자가 입력한 명령을 큐에 보관한다/
+      commandHistory2.offer(command);
 
       if (command.equals("/lesson/add")) {
         lessonHandler.addLesson();
@@ -95,6 +111,9 @@ public class App {
       } else if (command.equals("history")) {
         printCommandhistory();
 
+      } else if (command.equals("history2")) {
+        printCommandhistory2();
+
       }else {
         System.out.println("실행할 수 없는 명령입니다.");
       }
@@ -105,17 +124,46 @@ public class App {
     keyboard.close();
   }
 
+  
+
   private static void printCommandhistory() {
     try {
       // 명령어가 보관된 스택에서 명령어를 꺼내기 전에 복제한다.
       Stack<String> temp = commandHistory.clone();
+      int count = 0;
       while (!temp.empty()) {
         System.out.println(temp.pop());
+        if(++count % 5 == 0) {
+          System.out.println(":");
+          String input = keyboard.nextLine();
+          if (input.equalsIgnoreCase("q"))
+            break;
+        }
       }
     } catch (Exception e) {
       e.printStackTrace();
     }
-  }
+  }//printCommandhistory
+  
+  private static void printCommandhistory2() {
+    try {
+      // 명령어가 보관된 스택에서 명령어를 꺼내기 전에 복제한다.
+      Queue<String> temp = commandHistory2.clone();
+      int count = 0;
+      while (!temp.empty()) {
+        System.out.println(temp.poll());
+        if(++count % 5 == 0) {
+          System.out.println(":");
+          String input = keyboard.nextLine();
+          if (input.equalsIgnoreCase("q"))
+            break;
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    
+  }//printCommandhistory2
 
   private static String prompt() {
     System.out.print("명령> ");
