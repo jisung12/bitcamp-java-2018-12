@@ -6,12 +6,12 @@ public class Board implements Cloneable {
   private String contents;
   private Date createdDate;
   private int viewCount;
-  
+
   @Override
   public Board clone() throws CloneNotSupportedException {
     return (Board) super.clone();
   }
-  
+
   public int getNo() {
     return no;
   }
@@ -36,6 +36,17 @@ public class Board implements Cloneable {
   public void setViewCount(int viewCount) {
     this.viewCount = viewCount;
   }
-  
-  
+
+  public static Board valueOf(String csv) {
+
+    String[] values = csv.split(",");
+
+    Board board = new Board();
+    board.setNo(Integer.parseInt(values[0]));
+    board.setContents(values[1]);
+
+
+    return board;
+  }
+
 }

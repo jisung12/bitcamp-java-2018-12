@@ -16,11 +16,11 @@ public class LessonListCommand implements Command {
   
   @Override
   public void execute() {
-    Board[] boards = list.toArray(new Board[] {});
-    for (Board board : boards) {
-      System.out.printf("%3d, %-20s, %s, %d\n", 
-          board.getNo(), board.getContents(), 
-          board.getCreatedDate(), board.getViewCount());
+    Lesson[] lessons = list.toArray(new Lesson[0]);
+    for (Lesson lesson : lessons) {
+      System.out.printf("%3d, %-20s, %s~%s, %d\n", 
+          lesson.getNo(), lesson.getTitle(), 
+          lesson.getStartDate(), lesson.getEndDate(),lesson.getTotalHours());
     }
   }
 
