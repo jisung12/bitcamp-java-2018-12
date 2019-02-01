@@ -49,9 +49,7 @@ public class Test01 {
     } finally {
       keyboard.close();      
     }
-
   }//main
-
 
 
   static int sum(int value) { // f(n) = n + f(n-1)

@@ -43,10 +43,12 @@ public class App {
   public static void main(String[] args) {
 
     // 데이터 로딩
+  
     loadLessonData();
     loadBoardData();
     loadMemberData();
-
+   
+    
     HashMap<String, Command> commandMap = new HashMap<>();
 
     commandMap.put("/board/add", new BoardAddCommand(keyboard, boardList));
@@ -113,6 +115,8 @@ public class App {
       System.out.println(); 
     }
 
+    
+    
     keyboard.close();
   }
 
@@ -165,7 +169,7 @@ public class App {
       e1.printStackTrace();
 
     } catch (NoSuchElementException e) {
-      System.out.println("Member 데이터 로딩 완료!");
+      System.out.print("");
     }
   }//loadMemberData
 
@@ -197,7 +201,7 @@ public class App {
     } catch (IOException e1) {
       e1.printStackTrace();
     }catch (NoSuchElementException e) {
-      System.out.println("Board 데이터 로딩 완료!");
+      System.out.print("");
     }
   }//loadBoardData
 
