@@ -15,7 +15,6 @@ public class MemberDeleteCommand implements Command{
     this.list = list;
   }
   
-  @Override
   public void execute() {
     System.out.print("번호? ");
     int no = Integer.parseInt(keyboard.nextLine());
@@ -25,15 +24,10 @@ public class MemberDeleteCommand implements Command{
       System.out.println("해당 회원을 찾을 수 없습니다.");
       return;
     }
-
-    Member member = list.get(index);
-
-    System.out.printf("이름: %s\n", member.getName());
-    System.out.printf("이메일: %s\n", member.getEmail());
-    System.out.printf("암호: %s\n", member.getPassword());
-    System.out.printf("사진: %s\n", member.getPhoto());
-    System.out.printf("전화: %s\n", member.getTel());
-    System.out.printf("가입일: %s\n", member.getRegisteredDate());
+    
+    list.remove(index);
+    
+    System.out.println("회원을 삭제했습니다.");
   }
   
   private int indexOfMember(int no) {
@@ -44,6 +38,7 @@ public class MemberDeleteCommand implements Command{
     }
     return -1;
   }
+  
   
   
 }
