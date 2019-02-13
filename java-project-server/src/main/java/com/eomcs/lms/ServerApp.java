@@ -1,10 +1,8 @@
 // 2단계 : 클라이언트 연결을 승인한다.
 package com.eomcs.lms;
 
-import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.Scanner;
 
 public class ServerApp {
 
@@ -14,19 +12,9 @@ public class ServerApp {
       System.out.println("서버 시작!");
       while(true) {
 
-        try(Socket socket = serverSocket.accept();
-            PrintWriter out = new PrintWriter(socket.getOutputStream());
-              Scanner in = new Scanner(socket.getInputStream())
-            ){
+        try(Socket socket = serverSocket.accept()){
           System.out.println("클라이언트와 연결되었음.");
 
-          // 클라이언트에서 serialize해서 보내온 member 객체의 내용을 출력하라.
-          String request = in.nextLine();
-          
-          // 그리고 즉시 클라이언트로 Member 객체를 serialize하여 보내라!
-          out.println(request);
-          out.flush();
-          
         }catch(Exception e) {
           e.printStackTrace();
         }
