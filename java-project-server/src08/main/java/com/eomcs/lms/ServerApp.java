@@ -1,4 +1,4 @@
-// 7단계: 클라이언트의 연결을 승인한다.
+// 8단계: 클라이언트 요청을 처리하는 클래스에 대해 리팩토링 수행
 package com.eomcs.lms;
 
 import java.io.ObjectInputStream;
@@ -37,7 +37,7 @@ public class ServerApp {
           
           MemberService memberService = new MemberService(in, out);
           LessonService lessonService = new LessonService(in, out);
-          BoardService boardService = new BoardService(in, out);
+          BoardService boardService = new BoardService(in, out); 
           
           loop: while (true) {
               String request = in.readUTF();

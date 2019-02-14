@@ -1,11 +1,9 @@
-// 10단계: 데이터를 파일로 관리한다.
+// 11단계: AbstractService 상속 받기
 package com.eomcs.lms.service;
 
 import com.eomcs.lms.domain.Lesson;
 
-//클라이언트의 요청을 처리하는 클래스라는 의미로 
-//클래스명을 *Service로 변경한다.
-public class LessonService extends AbstractService<Lesson>{
+public class LessonService extends AbstractService<Lesson> {
 
   public void execute(String request) throws Exception {
 
@@ -42,7 +40,8 @@ public class LessonService extends AbstractService<Lesson>{
     out.writeUTF("OK");
     out.flush();
     out.writeUTF("OK");
-    out.writeObject(list);
+    //out.writeObject(list);
+    out.writeUnshared(list);
   }
 
   private void detail() throws Exception {

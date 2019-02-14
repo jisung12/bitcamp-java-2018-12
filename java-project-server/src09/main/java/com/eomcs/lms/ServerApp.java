@@ -1,4 +1,4 @@
-// 9단계 : 클라이언트 요청을 처리하는 서비스 클래스를 별도의 패키지로 분류.
+// 9단계: 클라이언트 요청을 처리하는 서비스 클래스를 별도의 패키지로 분류하기
 package com.eomcs.lms;
 
 import java.io.ObjectInputStream;
@@ -40,7 +40,7 @@ public class ServerApp {
           
           MemberService memberService = new MemberService(in, out);
           LessonService lessonService = new LessonService(in, out);
-          BoardService boardService = new BoardService(in, out);
+          BoardService boardService = new BoardService(in, out); 
           
           loop: while (true) {
               String request = in.readUTF();

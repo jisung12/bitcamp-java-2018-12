@@ -30,29 +30,29 @@ public class MemberService {
   public void loadData(String filepath) {
     this.filepath = filepath;
     
-    try(ObjectInputStream in = new ObjectInputStream(
+    try (ObjectInputStream in = new ObjectInputStream(
         new BufferedInputStream(
             new FileInputStream(this.filepath)))) {
-
-      members = (List<Member>)in.readObject();
-
+      
+      members = (List<Member>) in.readObject();
+      
     } catch (Exception e) {
       members = new ArrayList<Member>();
-      throw new RuntimeException("회원 데이터 파일 로딩 오류", e);
-    } 
-  }
-  
-  public void saveData() throws Exception{
-    try(  ObjectOutputStream out = new ObjectOutputStream(
-        new BufferedOutputStream(
-            new FileOutputStream(this.filepath)));){
-
-      out.writeObject(members);
-
-    } catch (Exception e) {
-      throw new RuntimeException("회원 데이터 파일 저장 오류", e);
+      throw new RuntimeException("회원 데이터 파일 로딩 오류!", e);
     }
   }
+  
+  public void saveData() throws Exception {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new BufferedOutputStream(
+            new FileOutputStream(this.filepath)))) {
+    
+      out.writeObject(members);
+      
+    } catch (Exception e) {
+      throw new Exception("회원 데이터의 파일 저장 오류!", e);
+    }
+  }  
   
   public void execute(String request) throws Exception {
 

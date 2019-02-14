@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import com.eomcs.lms.domain.Member;
 
 //클라이언트의 요청을 처리하는 클래스라는 의미로 
-//클래스명을 *Service로 변경.
+//클래스명을 *Service로 변경한다.
 public class MemberService {
 
   ArrayList<Member> members = new ArrayList<>();

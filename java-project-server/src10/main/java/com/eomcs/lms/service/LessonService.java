@@ -15,7 +15,7 @@ import com.eomcs.lms.domain.Lesson;
 //클래스명을 *Service로 변경한다.
 public class LessonService {
 
-  List<Lesson> lessons = new ArrayList<>();
+  List<Lesson> lessons;
 
   ObjectInputStream in;
   ObjectOutputStream out;
@@ -30,29 +30,29 @@ public class LessonService {
   public void loadData(String filepath) {
     this.filepath = filepath;
     
-    try(ObjectInputStream in = new ObjectInputStream(
+    try (ObjectInputStream in = new ObjectInputStream(
         new BufferedInputStream(
             new FileInputStream(this.filepath)))) {
-
-      lessons = (List<Lesson>)in.readObject();
-
+      
+      lessons = (List<Lesson>) in.readObject();
+      
     } catch (Exception e) {
       lessons = new ArrayList<Lesson>();
-      throw new RuntimeException("수업 데이터 파일 로딩 오류", e);
-    } 
-  }
-  
-  public void saveData() throws Exception{
-    try(  ObjectOutputStream out = new ObjectOutputStream(
-        new BufferedOutputStream(
-            new FileOutputStream(this.filepath)));){
-
-      out.writeObject(lessons);
-
-    } catch (Exception e) {
-      throw new RuntimeException("수업 데이터 파일 저장 오류", e);
+      throw new RuntimeException("수업 데이터 파일 로딩 오류!", e);
     }
   }
+  
+  public void saveData() throws Exception {
+    try (ObjectOutputStream out = new ObjectOutputStream(
+        new BufferedOutputStream(
+            new FileOutputStream(this.filepath)))) {
+    
+      out.writeObject(lessons);
+      
+    } catch (Exception e) {
+      throw new Exception("수업 데이터의 파일 저장 오류!", e);
+    }
+  }  
   
   public void execute(String request) throws Exception {
 

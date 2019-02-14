@@ -1,4 +1,4 @@
-// 2단계: 클라이언트의 연결을 승인한다.
+// 6단계: 클라이언트가 보낸 회원 관리 명령어(/member/*)를 처리한다.
 package com.eomcs.lms;
 
 import java.io.ObjectInputStream;
@@ -114,7 +114,7 @@ public class ServerApp {
     
     out.writeUTF("FAIL");
   }
-  
+
   static void delete() throws Exception {
     int no = in.readInt();
     
@@ -132,6 +132,10 @@ public class ServerApp {
   }
 
 }
+
+
+
+
 
 
 
