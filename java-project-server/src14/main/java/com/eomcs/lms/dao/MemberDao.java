@@ -2,25 +2,25 @@
 package com.eomcs.lms.dao;
 
 import java.util.List;
-import com.eomcs.lms.domain.Lesson;
+import com.eomcs.lms.domain.Member;
 
-public class LessonDao extends AbstractDao<Lesson> {
+public class MemberDao extends AbstractDao<Member> {
 
-  public LessonDao(String filepath) {
+  public MemberDao(String filepath) {
     this.filepath = filepath;
   }
   
-  public void insert(Lesson lesson) throws Exception{
-    list.add(lesson);
+  public void insert(Member member) throws Exception {
+    list.add(member);
     this.saveData();
   }
 
-  public List<Lesson> findAll() {
+  public List<Member> findAll() {
     return list;
   }
 
-  public Lesson findByNo(int no) {
-    for (Lesson obj : list) {
+  public Member findByNo(int no) {
+    for (Member obj : list) {
       if (obj.getNo() == no) {
         return obj;
       }
@@ -28,11 +28,11 @@ public class LessonDao extends AbstractDao<Lesson> {
     return null;
   }
 
-  public int update(Lesson lesson) throws Exception {
+  public int update(Member member) throws Exception {
     int index = 0;
-    for (Lesson obj : list) {
-      if (obj.getNo() == lesson.getNo()) {
-        list.set(index, lesson);
+    for (Member obj : list) {
+      if (obj.getNo() == member.getNo()) {
+        list.set(index, member);
         this.saveData();
         return 1;
       }
@@ -43,7 +43,7 @@ public class LessonDao extends AbstractDao<Lesson> {
 
   public int delete(int no) throws Exception {
     int index = 0;
-    for (Lesson obj : list) {
+    for (Member obj : list) {
       if (obj.getNo() == no) {
         list.remove(index);
         this.saveData();
