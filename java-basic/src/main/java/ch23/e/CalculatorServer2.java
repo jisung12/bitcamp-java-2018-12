@@ -1,4 +1,4 @@
-// Stateful 응용
+// Stateful 응용 - 클라이언트의 계산 결과를 서버에 유지하기
 package ch23.e;
 
 import java.io.BufferedReader;
@@ -25,7 +25,7 @@ public class CalculatorServer2 {
           
           System.out.println("클라이언트와 연결됨!");
           
-          // 클라이언트의 요청에 대한 계산 결과를 유지할 변수 선언 
+          // 클라이언트의 요청에 대한 계산 결과를 유지할 변수 선언
           int result = 0;
           
           while (true) {
@@ -33,7 +33,7 @@ public class CalculatorServer2 {
             System.out.println("요청 처리함.");
             
             if (request.equalsIgnoreCase("quit")) {
-              out.printf("최종 계산 결과는 %d입니다.\n", result);
+              out.printf("최종 계산 결과는 %d 입니다.\n", result);
               out.flush();
               break;
             }
@@ -46,7 +46,6 @@ public class CalculatorServer2 {
             try { 
               op = input[0];
               b = Integer.parseInt(input[1]);
-              
             } catch (Exception e) {
               out.println("식의 형식이 바르지 않습니다.");
               out.flush();

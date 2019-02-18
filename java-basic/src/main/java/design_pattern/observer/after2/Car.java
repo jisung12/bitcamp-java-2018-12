@@ -10,7 +10,7 @@ public class Car {
   //
   HashSet<CarObserver> observers = new HashSet<>();
   
-  // 옵저버를 관리하는 메서드 추가 
+  // 옵저버를 관리하는 메서드 추가
   public void addObserver(CarObserver observer) {
     observers.add(observer);
   }
@@ -19,34 +19,39 @@ public class Car {
     observers.remove(observer);
   }
   
-  public void notifyObserverOnStrated() { // 자동차의 시동을 걸 때 통지한다.
-    for(CarObserver observer : observers) {
+  // 자동차의 시동을 걸 때 통지한다.
+  public void notifyObserversOnStarted() {
+    for (CarObserver observer : observers) {
       observer.carStarted();
     }
   }
   
-  public void notifyObserverOnStopped() { // 자동차의 시동을 끌 때 통지한다.
-    for(CarObserver observer : observers) {
+  // 자동차를 시동을 끌 때 통지한다.
+  public void notifyObserversOnStopped() {
+    for (CarObserver observer : observers) {
       observer.carStopped();
     }
   }
   
   public void start() {
-    System.out.println("시동을 건다");
+    System.out.println("시동을 건다.");
     
-    notifyObserverOnStrated();   
+    notifyObserversOnStarted();
   }
-  
   
   public void run() {
-    System.out.println("달린다");
+    System.out.println("달린다.");
   }
-  
   
   public void stop() {
-    System.out.println("시동을 끈다");
+    System.out.println("시동을 끈다.");
     
-    notifyObserverOnStopped();
+    notifyObserversOnStopped();
   }
-  
-} //Car
+}
+
+
+
+
+
+

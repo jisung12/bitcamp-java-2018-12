@@ -24,15 +24,11 @@ public class QueueTest {
     
     assertEquals(100, q.poll());
     assertEquals(2, q.size());
-    
     assertEquals(200, q.poll());
     assertEquals(1, q.size());
-    
     assertEquals(300, q.poll());
     assertEquals(0, q.size());
-    
-    
-    
+    assertEquals(null, q.poll());
   }
 
   @Test

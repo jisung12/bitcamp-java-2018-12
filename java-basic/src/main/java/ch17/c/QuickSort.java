@@ -1,12 +1,12 @@
 package ch17.c;
 
-public class QuickSort extends Sorter{
+public class QuickSort extends Sorter {
   
   @Override
   public void sort(int[] values) {
-    start(values, 0, values.length -1);
+    start(values, 0, values.length - 1);
   }
-
+  
   private int partition(int[] arr, int low, int high) 
   { 
       int pivot = arr[high];  

@@ -1,4 +1,4 @@
-// 인스턴스 필드의 초기화 - 생성자를 통해 필드를 초기화 하기
+// 인스턴스 필드의 초기화 - 생성자를 통해 필드를 초기화 하기 
 package ch10;
 
 class Monitor4 {
@@ -7,7 +7,7 @@ class Monitor4 {
   int widthRes; // 해상도 너비
   int heightRes; // 해상도 높이
   
-  Monitor4() { // 생성 <= 파라미터를 받지 않는 생성자를 기본 생성자(default constructor)라 부른다.
+  Monitor4() { // 생성자 <== 파라미터를 받지 않는 생성자를 기본 생성자(default constructor)라 부른다.
     this.bright = 50;
     this.contrast = 50;
     this.widthRes = 1920;
@@ -28,7 +28,8 @@ public class Test06 {
     // 모니터 인스턴스 생성
     Monitor4 m1 = new Monitor4();
     
-    // 인스턴스 필드의 값이 생성자를 통해 유효한 기본 값들로 미리 초기화 되었기 때문에 바로 사용할 수 있다.
+    // 인스턴스 필드의 값이 생성자를 통해 유효한 기본 값들로 
+    // 미리 초기화 되었기 때문에 바로 사용할 수 있다.
     m1.display(); 
     
     // 물론 특정 속성의 값을 바꾼 후에 사용해도 된다.

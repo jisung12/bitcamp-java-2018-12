@@ -17,7 +17,7 @@ public class LinkedListTest {
     
     assertEquals(6, list.size());
   }
-
+  
   @Test
   public void testGet() {
     LinkedList list = new LinkedList();
@@ -47,9 +47,10 @@ public class LinkedListTest {
     list.add(600);
     
     Object[] arr = list.toArray();
+    
     assertEquals(6, arr.length);
-    assertArrayEquals(new Object[] {100, 200, 300, 400, 500, 600}, arr);
-  }//testToArray
+    assertArrayEquals(new Object[] {100,200,300,400,500,600}, arr);
+  }
   
   @Test
   public void testSet() {
@@ -74,8 +75,7 @@ public class LinkedListTest {
     
     assertNull(list.set(-1, 1000));
     assertNull(list.set(6, 1000));
-  }//set
-  
+  }
   
   @Test
   public void testInsert() {
@@ -89,17 +89,19 @@ public class LinkedListTest {
     
     assertEquals(-1, list.insert(-1, 55));
     assertEquals(-1, list.insert(6, 55));
-
+    
     assertEquals(0, list.insert(2, 55));
-    assertArrayEquals(new Object[] {100, 200, 55, 300, 400, 500, 600}, list.toArray());
- 
+    assertArrayEquals(
+        new Object[] {100, 200, 55, 300, 400, 500, 600}, list.toArray());
+    
     assertEquals(0, list.insert(0, 55));
-    assertArrayEquals(new Object[] {55, 100, 200, 55, 300, 400, 500, 600}, list.toArray());
- 
+    assertArrayEquals(
+        new Object[] {55, 100, 200, 55, 300, 400, 500, 600}, list.toArray());
+    
     assertEquals(0, list.insert(7, 55));
-    assertArrayEquals(new Object[] {55, 100, 200, 55, 300, 400, 500, 55 ,600}, list.toArray());
-  }//Insert
-  
+    assertArrayEquals(
+        new Object[] {55, 100, 200, 55, 300, 400, 500, 55, 600}, list.toArray());
+  }
   
   @Test
   public void testRemove() {
@@ -113,19 +115,22 @@ public class LinkedListTest {
     
     assertEquals(300, list.remove(2));
     assertEquals(400, list.remove(2));
-    assertArrayEquals(new Object[] {100, 200, 500, 600}, list.toArray());
+    assertArrayEquals(
+        new Object[] {100, 200, 500, 600}, list.toArray());
     
     assertEquals(600, list.remove(3));
-    assertArrayEquals(new Object[] {100, 200, 500}, list.toArray());
+    assertArrayEquals(
+        new Object[] {100, 200, 500}, list.toArray());
     
     assertEquals(100, list.remove(0));
-    assertArrayEquals(new Object[] {200, 500}, list.toArray());
+    assertArrayEquals(
+        new Object[] {200, 500}, list.toArray());
     
     assertEquals(200, list.remove(0));
     assertEquals(500, list.remove(0));
-    assertArrayEquals(new Object[] {}, list.toArray());
-  }//Remove
-  
-  
+    assertArrayEquals(
+        new Object[] {}, list.toArray());
+    
+  }
 
 }

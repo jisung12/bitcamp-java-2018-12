@@ -2,11 +2,9 @@ package ch22.g;
 
 import java.io.Serializable;
 
-// sum과 aver 필드는 getter 메서드만 둔다.
+// sum과 aver 필드는 getter 메서드만 둔다. 
 // setter를 제거한다.
-
 public class Score3 implements Serializable {
-  
   private static final long serialVersionUID = 1L;
   
   private String name;
@@ -17,14 +15,14 @@ public class Score3 implements Serializable {
   // serialize 대상에서 제외할 필드는 transient로 선언한다.
   transient private int sum;
   transient private float aver;
-  
+
   public Score3() {
     System.out.println("Score3()");
   }
 
   @Override
   public String toString() {
-    return "Score1 [name=" + name + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", sum="
+    return "Score3 [name=" + name + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", sum="
         + sum + ", aver=" + aver + "]";
   }
 
@@ -59,7 +57,6 @@ public class Score3 implements Serializable {
 
   public int getMath() {
     return math;
-    
   }
 
   public void setMath(int math) {
@@ -78,17 +75,12 @@ public class Score3 implements Serializable {
   public float getAver() {
     return aver;
   }
-  
+
   public void compute() {
     this.sum = this.kor + this.eng + this.math;
     this.aver = this.sum / 3f;
   }
-
 }
-
-
-
-
 
 
 

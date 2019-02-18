@@ -3,30 +3,20 @@ package algorithm.data_structure.queue2;
 
 import algorithm.data_structure.linkedlist3.LinkedList;
 
-// Queue가 보관하는 데이터 타입을 E라고 가정하자.
+// Queue가 보관하는 데이터 타입을 E 라고 가정하자.
 // => E라고 가정한 상태에서 코드를 작성한다.
 // 
-public class Queue<E> extends LinkedList<E>{
-  
+public class Queue<E> extends LinkedList<E> {
+
   public void offer(E value) {
-    //상속 받은 메서드를 사용하여 값을 추가.
     this.add(value);
   }
   
-  
-  
   public E poll() {
-    //상속 받은 메서드를 사용하여 값을 꺼내기.
     return this.remove(0);
-  
   }
-  
-  
   
   public boolean empty() {
-    //상속 받은 필드나 메서드를 사용하여 값을 리턴.
-    return size == 0;
+    return this.size == 0;
   }
-  
-  
 }

@@ -1,4 +1,4 @@
-// URL 요청하기 -  URLConnetction 사용
+// URL 요청하기 - URLConnection 사용
 package ch23.h;
 
 import java.io.BufferedReader;
@@ -10,8 +10,9 @@ import java.net.URLConnection;
 public class Test05 {
 
   public static void main(String[] args) throws Exception {
-    URL url = new URL("https://www.naver.com/");
-
+    
+    URL url = new URL("https://www.naver.com");
+    
     // URL 정보를 가지고 HTTP 요청을 수행할 객체를 얻는다.
     URLConnection con = url.openConnection();
     
@@ -26,13 +27,20 @@ public class Test05 {
     
     while (true) {
       String str = in2.readLine();
-      if(str == null)
+      if (str == null)
         break;
+      
       System.out.println(str);
-    }//while
-
+    }
+    
     in2.close();
     in.close();
   }
 
 }
+
+
+
+
+
+

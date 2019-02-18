@@ -8,7 +8,6 @@ public class Score {
   protected int sum;
   protected float aver;
   
-  // 대신 결과 값을 출력 할 메서드(getter)를 제공해야 한다.
   public int getSum() {
     return this.sum;
   }
@@ -16,11 +15,16 @@ public class Score {
   public float getAver() {
     return this.aver;
   }
-
+  
   public void compute() {
     this.sum = this.kor + this.eng + this.math;
     this.aver = this.sum / 3f;
   }
-
- 
 }
+
+
+
+
+
+
+

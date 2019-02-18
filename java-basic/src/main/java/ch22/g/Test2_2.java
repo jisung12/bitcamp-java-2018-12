@@ -5,14 +5,12 @@ import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 
 public class Test2_2 {
-
   public static void main(String[] args) {
     
-    
-    try(ObjectInputStream in = new ObjectInputStream (
-        new FileInputStream("score2.data"))) {
+    try (ObjectInputStream in = new ObjectInputStream(
+          new FileInputStream("score2.data"))) {
       
-      // deserialize 할 때
+      // deserialize 할 때 
       // private 필드의 값도 데이터를 읽어 저장한다.
       // 생성자나 setter를 호출하지 않는다.
       // 인스턴스를 생성한 후 직접 인스턴스의 필드 값을 저장한다.
@@ -20,10 +18,8 @@ public class Test2_2 {
       System.out.println(score);
       
       
-    } catch(Exception e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
-    
   }
-
 }

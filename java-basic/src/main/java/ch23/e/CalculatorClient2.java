@@ -1,4 +1,4 @@
-// Stateful 응용 - 클라리언트의 계산 결과를 서버에 유지하기
+// Stateful 응용 - 클라이언트의 계산 결과를 유지하기
 package ch23.e;
 
 import java.io.BufferedReader;
@@ -9,8 +9,8 @@ import java.util.Scanner;
 
 /*
 Stateful 응용
-=> 클라이언트와 서버가 연결되면 연결을 끊기 전까지
-   작업 정보를 
+=> 클라이언트와 서버가 연결되면 연결을 끊기 전까지 
+   작업 정보를 계속 유지할 수 있다.
  */
 public class CalculatorClient2 {
   public static void main(String[] args) {
@@ -20,7 +20,7 @@ public class CalculatorClient2 {
     // 계산 요청을 할 때 연산자와 값만 넘긴다.
     // 예) + 2
     // 예) / 3
-    //
+    // 
     try (Socket socket = new Socket("localhost", 8888);
         PrintStream out = new PrintStream(socket.getOutputStream());
         BufferedReader in = new BufferedReader(

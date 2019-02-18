@@ -1,4 +1,4 @@
-// java.io.File 클래스 : FileFilter 사용하기
+// java.io.File 클래스 : FileFilter 사용하기 III
 package ch22.a;
 
 import java.io.File;
@@ -6,17 +6,11 @@ import java.io.FileFilter;
 
 public class Test11_3 {
 
-  //static nested class
-  
-
   public static void main(String[] args) throws Exception {
     
-    // local class
-   
-    
     File file = new File(".");
-
-    // anonymous class
+    
+    // anonymous class 
     File[] files = file.listFiles(new FileFilter() {
       @Override
       public boolean accept(File pathname) {
@@ -26,17 +20,18 @@ public class Test11_3 {
           return false;
       }
     });
-
+    
     for (File f : files) {
-      System.out.printf("%s %12d %s\n",
-          f.isDirectory() ? "d" : "-", 
-              f.length(),
-              f.getName());
+      System.out.printf("%s %12d %s\n", 
+          f.isDirectory() ? "d" : "-",
+          f.length(),
+          f.getName());
     }
-
-
-  }
-
+    
+  }    
 }
+
+
+
 
 

@@ -5,9 +5,6 @@ public class Truck extends Car {
   
   @Override
   public void run() {
-    System.out.println("덜컹덜컹 달린다!");
+    System.out.println("덜컬덜컹 달린다!");
   }
-  
-  
-  
 }

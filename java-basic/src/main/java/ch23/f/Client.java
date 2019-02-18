@@ -19,16 +19,27 @@ public class Client {
       System.out.println("서버와 연결됨!");
       
       // 먼저 연결을 한 다음에 데이터를 보내고 받을 수 있다.
-      out.println("Hello");
-      System.out.println("데이터 보냄");
+      out.println("Hello!");
+      System.out.println("데이터 보냄!");
       
       String response = in.nextLine();
-      System.out.println("데이터 받음");
+      System.out.println("데이터 받음!");
       
       System.out.println(response);
-    
+      
     } catch (Exception e) {
       e.printStackTrace();
     }
   }
 }
+
+
+
+
+
+
+
+
+
+
+

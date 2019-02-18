@@ -9,7 +9,7 @@ public class Score1 {
   private float aver;
   
   public Score1() {
-    System.out.println("score1()");
+    System.out.println("Score1()");
   }
   
   public Score1(String name, int kor, int eng, int math) {
@@ -65,17 +65,16 @@ public class Score1 {
     return sum;
   }
 
- 
   public float getAver() {
     return aver;
   }
-
+  
   public void compute() {
     this.sum = this.kor + this.eng + this.math;
     this.aver = this.sum / 3f;
   }
-  
-  
-  
-  
 }
+
+
+
+

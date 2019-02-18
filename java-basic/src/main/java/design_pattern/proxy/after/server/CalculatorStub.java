@@ -11,13 +11,13 @@ import java.net.Socket;
 // => 객체가 있는 서버 측에서 요청과 응답을 대행하는 ORB를 "스켈레톤(skeleton)"이라 부른다.
 // => 객체를 사용하는 클라이언트 측에서 요청과 응답을 대행하는 ORB를 "스텁(stub)"이라 부른다.
 //
-// 스텁은 실제 일을하는 객체를 대행하기 때문에 같은 규칙에 따라 구현되어야 한다. 
+// 스텁은 실제 일을 하는 객체를 대행하기 때문에 같은 규칙에 따라 구현되어야 한다.
 // => 클라이언트는 이 스텁 클래스가 실제 일을 하는 객체인양 그대로 사용한다.
-// => 이렇게 실제 일을 하는 객체와 같은 규칙을 따르지만 메서드가 호출될 때
-//    자신이 직접 일을 하지 않고 실제 일을 하는 객체에게 위임한다.
+// => 이렇게 실제 일을 하는 객체와 같은 규칙을 따르지만 메서드가 호출될 때 
+//    자신이 직접 일을 하지 않고 , 실제 일을 하는 객체에게 위임한다.
 //
 //    이런 식으로 설계하는 것을 "프록시(proxy) 디자인 패턴"이라 한다.
-
+//
 public class CalculatorStub implements Calculator {
 
   private int compute(int a, int b, String op) throws Exception {
@@ -28,7 +28,7 @@ public class CalculatorStub implements Calculator {
       out.writeInt(a);
       out.writeInt(b);
       out.writeUTF(op);
-
+      
       if (in.readUTF().equalsIgnoreCase("OK")) {
         return in.readInt();
       } else {
@@ -41,7 +41,7 @@ public class CalculatorStub implements Calculator {
   public int plus(int a, int b) {
     try {
       return compute(a, b, "+");
-    } catch(Exception e) {
+    } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
@@ -50,7 +50,7 @@ public class CalculatorStub implements Calculator {
   public int minus(int a, int b) {
     try {
       return compute(a, b, "-");
-    } catch(Exception e) {
+    } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }

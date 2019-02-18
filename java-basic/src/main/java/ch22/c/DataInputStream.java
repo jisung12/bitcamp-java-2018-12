@@ -5,7 +5,7 @@ import java.io.InputStream;
 
 // 바이트를 읽어 primitive type의 값을 리턴하는 데코레이터 클래스이다.
 // 
-public class DataInputStream extends InputStream{
+public class DataInputStream extends InputStream {
 
   InputStream in;
   
@@ -13,13 +13,11 @@ public class DataInputStream extends InputStream{
     this.in = in;
   }
   
-  
-  
   @Override
   public int read() throws IOException {
     return in.read();
   }
-
+  
   public short readShort() throws IOException {
     int value = 0;
     
@@ -28,7 +26,6 @@ public class DataInputStream extends InputStream{
     
     return (short) value;
   }
-  
   
   public int readInt() throws IOException {
     int value = 0;
@@ -53,7 +50,11 @@ public class DataInputStream extends InputStream{
     
     // UTF-8로 저장된 바이트 배열을 String 객체로 만든다.
     return new String(bytes, "UTF-8");
-    
   }
   
 }
+
+
+
+
+

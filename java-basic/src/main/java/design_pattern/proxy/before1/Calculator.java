@@ -1,7 +1,7 @@
 package design_pattern.proxy.before1;
 
 public class Calculator {
-
+  
   public int plus(int a, int b) {
     return a + b;
   }
@@ -9,5 +9,4 @@ public class Calculator {
   public int minus(int a, int b) {
     return a - b;
   }
-  
 }

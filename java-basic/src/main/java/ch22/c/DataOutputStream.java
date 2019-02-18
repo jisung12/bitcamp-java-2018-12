@@ -5,7 +5,7 @@ import java.io.OutputStream;
 
 // primitive type의 데이터를 출력하는 플러그인 객체
 // => OutputStream의 데코레이터이다.
-public class DataOutputStream extends OutputStream{
+public class DataOutputStream extends OutputStream {
 
   OutputStream out;
   
@@ -13,17 +13,16 @@ public class DataOutputStream extends OutputStream{
     this.out = out;
   }
   
+  
   @Override
   public void write(int b) throws IOException {
     out.write(b);
-    
   }
   
   public void writeShort(short value) throws IOException {
     out.write(value >> 8);
     out.write(value);
   }
-  
   
   public void writeInt(int value) throws IOException {
     out.write(value >> 24);
@@ -47,3 +46,10 @@ public class DataOutputStream extends OutputStream{
   }
   
 }
+
+
+
+
+
+
+

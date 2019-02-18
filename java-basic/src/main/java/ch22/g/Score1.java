@@ -3,15 +3,15 @@ package ch22.g;
 import java.io.Serializable;
 
 public class Score1 implements Serializable {
-  
   private static final long serialVersionUID = 1L;
+  
   protected String name;
   protected int kor;
   protected int eng;
   protected int math;
   protected int sum;
   protected float aver;
-  
+
   public Score1() {
     System.out.println("Score1()");
   }
@@ -24,3 +24,7 @@ public class Score1 implements Serializable {
   
   
 }
+
+
+
+

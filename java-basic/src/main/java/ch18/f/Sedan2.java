@@ -8,7 +8,6 @@ public class Sedan2 implements CarSpec {
   // 인터페이스에 선언된대로 동작할 수 있도록 추상 메서드를 구현한다.
   @Override
   public void run() {
-    System.out.println("달린다.");
+    System.out.println("달린다!");
   }
-  
 }

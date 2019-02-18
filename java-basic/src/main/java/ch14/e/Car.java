@@ -5,12 +5,10 @@ public class Car {
   int cc;
   
   public void run() {
-    System.out.println("달린다");
+    System.out.println("달린다!");
   }
   
   public void stop() {
-    System.out.println("멈춘다");
+    System.out.println("멈춘다!");
   }
-  
-  
 }

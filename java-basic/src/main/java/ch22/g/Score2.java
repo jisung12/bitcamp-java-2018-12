@@ -2,11 +2,9 @@ package ch22.g;
 
 import java.io.Serializable;
 
-
 public class Score2 implements Serializable {
-
   private static final long serialVersionUID = 1L;
-
+  
   private String name;
   private int kor;
   private int eng;
@@ -20,7 +18,7 @@ public class Score2 implements Serializable {
 
   @Override
   public String toString() {
-    return "Score1 [name=" + name + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", sum="
+    return "Score2 [name=" + name + ", kor=" + kor + ", eng=" + eng + ", math=" + math + ", sum="
         + sum + ", aver=" + aver + "]";
   }
 
@@ -77,6 +75,10 @@ public class Score2 implements Serializable {
     System.out.println("setAver()");
     this.aver = aver;
   }
-
-
+  
+  
 }
+
+
+
+
