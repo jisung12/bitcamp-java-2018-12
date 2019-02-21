@@ -1,4 +1,4 @@
-// 프록시 패턴 적용 - BOardDao에서 인터페이스를 추출한다.
+// 프록시 패턴 적용 - LessonDao에서 인터페이스를 추출한다.
 package com.eomcs.lms.dao;
 
 import java.util.List;

@@ -1,18 +1,19 @@
 package com.eomcs.lms.handler;
 import java.sql.Date;
 import java.util.Scanner;
+import com.eomcs.lms.dao.LessonDao;
 import com.eomcs.lms.domain.Lesson;
-import com.eomcs.lms.proxy.LessonDaoProxy;
 
 public class LessonAddCommand implements Command {
 
   Scanner keyboard;
-  LessonDaoProxy lessonDao;
-
-  public LessonAddCommand(Scanner keyboard, LessonDaoProxy lessonAgent) {
+  LessonDao lessonDao;
+  
+  public LessonAddCommand(Scanner keyboard, LessonDao lessonDao) {
     this.keyboard = keyboard;
-    this.lessonDao = lessonAgent;
+    this.lessonDao = lessonDao;
   }
+  
 
   @Override
   public void execute() {
@@ -40,7 +41,7 @@ public class LessonAddCommand implements Command {
     lesson.setDayHours(Integer.parseInt(keyboard.nextLine()));
 
     try {
-      lessonDao.add(lesson);
+      lessonDao.insert(lesson);
       System.out.println("저장하였습니다.");
       
     } catch (Exception e) {
