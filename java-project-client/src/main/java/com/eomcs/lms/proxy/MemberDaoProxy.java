@@ -4,9 +4,12 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
+import com.eomcs.lms.dao.MemberDao;
 import com.eomcs.lms.domain.Member;
 
-public class MemberDaoProxy {
+//서버쪽에 있는 MemberDaoImpl 객체를 대행할 클라이언트측 대행자 클래스 정의 
+//
+public class MemberDaoProxy implements MemberDao {
 
   String serverAddr;
   int port;
@@ -35,12 +38,12 @@ public class MemberDaoProxy {
         throw new Exception("서버의 데이터 목록 가져오기 실패!");
 
       return (List<Member>) in.readObject();
-    } catch(Exception e) {
+    } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
 
-  public void add(Member member) {
+  public void insert(Member member) {
     try (Socket socket = new Socket(this.serverAddr, this.port);
         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
@@ -57,7 +60,7 @@ public class MemberDaoProxy {
 
       if (!status.equals("OK"))
         throw new Exception("서버의 데이터 저장 실패!");
-    } catch(Exception e) {
+    } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
@@ -81,12 +84,12 @@ public class MemberDaoProxy {
         throw new Exception("서버의 데이터 가져오기 실패!");
 
       return (Member) in.readObject();
-    } catch(Exception e) {
+    } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
 
-  public void update(Member member) {
+  public int update(Member member) {
     try (Socket socket = new Socket(this.serverAddr, this.port);
         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
         ObjectInputStream in = new ObjectInputStream(socket.getInputStream())) {
@@ -102,7 +105,10 @@ public class MemberDaoProxy {
       String status = in.readUTF();
       if (!status.equals("OK")) 
         throw new Exception("서버의 데이터 데이터 변경 실패!");
-    } catch(Exception e) {
+      
+      return 1;
+      
+    } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
@@ -124,10 +130,10 @@ public class MemberDaoProxy {
 
       if (!status.equals("OK")) 
         throw new Exception("서버의 데이터 삭제 실패!");
-
+      
       return 1;
-
-    } catch(Exception e) {
+      
+    } catch (Exception e) {
       throw new RuntimeException(e);
     }
   }
