@@ -38,6 +38,7 @@ public class ClientApp {
         continue;
       } 
       
+      
       int index = input.indexOf("/"); // 예) localhost:8888/board/list
       String[] values = input.substring(0, index).split(":");
       String host = values[0];
@@ -45,9 +46,9 @@ public class ClientApp {
       if (values.length > 1) {
         port = Integer.parseInt(values[1]);
       }
+     // 192.168.0.11/board/add  12 
       
       String command = input.substring(index);
-      
 
       try (Socket socket = new Socket(host, port);
           PrintWriter out = new PrintWriter(socket.getOutputStream());
