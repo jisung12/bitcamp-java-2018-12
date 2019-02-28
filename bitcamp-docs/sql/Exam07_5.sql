@@ -19,6 +19,7 @@ from memb cross join stnt;
          컬럼명 앞에 테이블명을 명시하여 구분하라!*/ 
 select memb.mno, name, stnt.mno, work, bank
 from memb cross join stnt;
+
 /* 예전 문법 */
 select memb.mno, name, stnt.mno, work, bank
 from memb, stnt;
@@ -61,10 +62,13 @@ from memb m join stnt s using (mno);
 /* 만약 두 테이블에 같은 이름을 가진 컬럼이 없으면, 
    natural join을 수행하지 못한다.
    또한 join using 으로도 해결할 수 없다.
-   이럴 경우 join ~ on 컬럼a=컬럼b 문법을 사용하여
+   이럴 경우 join ~ on 컬럼a=컬럼b 문법을 사용하여select m.mno, name, s.mno, work, bank
+from memb m, stnt s
+where m.mno=s.mno;
    각 테이블의 어떤 컬럼과 값을 비교할 것인지 지정하라!*/
 select m.mno, name, s.mno, work, bank
-from memb m inner join stnt s on m.mno=s.mno;       
+from memb m inner join stnt s on m.mno=s.mno;  
+
 /* inner는 생략 가능하다 */
 select m.mno, name, s.mno, work, bank
 from memb m join stnt s on m.mno=s.mno;
@@ -191,7 +195,8 @@ from lect_appl la
 
 /* 7단계: 매니저의 직위 출력
  * => 매니저 번호는 lect 테이블 있다.
- * => 매니저 직위는 mgr 테이블에 있다.  
+ * => 매니저 직위는 mgr 테이블에 있다.  select la.lano, la.lno, la.mno, la.rdt
+from lect_appl la;    
  */
 select la.lano, l.titl, m.name, s.work, la.rdt, r.name, m2.name, mr.posi
 from lect_appl la 
