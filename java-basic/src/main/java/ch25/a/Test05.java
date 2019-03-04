@@ -1,23 +1,31 @@
-// java.sql.Driver 구현체 조회
+// java.sql.Connection 객체 
 package ch25.a;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class Test05 {
 
   public static void main(String[] args) {
-    
-    try {
-      // JDBC URL을 이용하여 등록된 java.sql.Driver 구현체를 알아낸다.
-      java.sql.Driver driver = DriverManager.getDriver("jdbc:mariadb:");
-      System.out.println(driver);
+    // DriverManager.getConnetion()
+    // => org.mariadb.jdbc.Driver.connect()
+    //  
+    try (Connection con = DriverManager.getConnection(
+        "jdbc:mariadb://localhost/bitcampdb?user=bitcamp&password=1111")) {
+      System.out.println("DBMS에 연결됨!");
       
     } catch (Exception e) {
       e.printStackTrace();
     }
-    
-    
-    
-  } //main
+  }
 
-}//Test01
+}
+
+
+
+
+
+
+
+
+

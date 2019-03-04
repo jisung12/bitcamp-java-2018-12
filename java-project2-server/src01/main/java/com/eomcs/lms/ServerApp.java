@@ -1,6 +1,27 @@
-// 1단계: 클라이언트와 통신하는 기능으로 변경한다.
-// 
-
+// 1단계: 클라이언트 요청에 응답하는 서버 프로그램으로 전환하기
+//
+//클라이언트와 서버 사이의 통신 규칙
+//
+//규칙1) 단순한 명령어 전송과 실행 결과 수신
+//[클라이언트]                                        [서버]
+//서버에 연결 요청        -------------->           연결 승인
+//명령(CRLF)              -------------->           명령처리
+//화면 출력               <--------------           응답(CRLF)
+//화면 출력               <--------------           응답(CRLF)
+//명령어 실행 완료        <--------------           !end!(CRLF)
+//
+//규칙2) 사용자 입력을 포함하는 경우
+//[클라이언트]                                        [서버]
+//서버에 연결 요청        -------------->           연결 승인
+//명령(CRLF)              -------------->           명령처리
+//화면 출력               <--------------           응답(CRLF)
+//사용자 입력 요구        <--------------           !{}!(CRLF)
+//입력값(CRLF)            -------------->           입력 값 처리
+//화면 출력               <--------------           응답(CRLF)
+//사용자 입력 요구        <--------------           !{}!(CRLF)
+//입력값(CRLF)            -------------->           입력 값 처리
+//명령어 실행 완료        <--------------           !end!(CRLF)
+//
 package com.eomcs.lms;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -9,6 +30,10 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Scanner;
+import java.util.Stack;
 import com.eomcs.lms.context.ApplicationContextListener;
 
 public class ServerApp {
@@ -31,11 +56,11 @@ public class ServerApp {
       for (ApplicationContextListener listener : listeners) {
         listener.contextInitialized(context);
       }
-      
-      System.out.println("서버 실행 중.........................................");
 
+      System.out.println("서버 실행 중...");
+      
       while (true) {
-        
+
         try (Socket socket = ss.accept();
             BufferedReader in = new BufferedReader(
                 new InputStreamReader(socket.getInputStream()));
@@ -49,13 +74,12 @@ public class ServerApp {
             break;
           }
           
-          //클라이언트에게 응답하기
+          // 클라이언트에게 응답하기
           out.println("ok");
           out.println("!end!");
           out.flush();
           
           /*
-
           commandHistory.push(command);
           commandHistory2.offer(command);
 
@@ -86,12 +110,10 @@ public class ServerApp {
             System.out.println("명령어 실행 중 오류 발생 : " + e.toString());
             e.printStackTrace();
           }
-
-           */
+          */
 
         } // try(Socket)
       } // while
-
 
       // 애플리케이션을 종료할 때, 등록된 리스너에게 알려준다.
       for (ApplicationContextListener listener : listeners) {

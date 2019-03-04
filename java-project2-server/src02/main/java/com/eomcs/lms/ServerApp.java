@@ -1,5 +1,27 @@
-// 2단계: 
-// 
+// 2단계: '규칙1'에 따라 클라이언트에게 게시물 목록 보내기 
+//
+//클라이언트와 서버 사이의 통신 규칙
+//
+//규칙1) 단순한 명령어 전송과 실행 결과 수신
+//[클라이언트]                                        [서버]
+//서버에 연결 요청        -------------->           연결 승인
+//명령(CRLF)              -------------->           명령처리
+//화면 출력               <--------------           응답(CRLF)
+//화면 출력               <--------------           응답(CRLF)
+//명령어 실행 완료        <--------------           !end!(CRLF)
+//
+//규칙2) 사용자 입력을 포함하는 경우
+//[클라이언트]                                        [서버]
+//서버에 연결 요청        -------------->           연결 승인
+//명령(CRLF)              -------------->           명령처리
+//화면 출력               <--------------           응답(CRLF)
+//사용자 입력 요구        <--------------           !{}!(CRLF)
+//입력값(CRLF)            -------------->           입력 값 처리
+//화면 출력               <--------------           응답(CRLF)
+//사용자 입력 요구        <--------------           !{}!(CRLF)
+//입력값(CRLF)            -------------->           입력 값 처리
+//명령어 실행 완료        <--------------           !end!(CRLF)
+//
 package com.eomcs.lms;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -23,7 +45,7 @@ public class ServerApp {
   public void service() throws Exception {
 
     try (ServerSocket ss = new ServerSocket(8888)) {
-
+      
       // App에서 사용할 객체를 보관하는 저장소
       HashMap<String,Object> context = new HashMap<>();
 
@@ -32,8 +54,8 @@ public class ServerApp {
         listener.contextInitialized(context);
       }
 
-      System.out.println("서버 실행 중.........................................");
-
+      System.out.println("서버 실행 중...");
+      
       while (true) {
 
         try (Socket socket = ss.accept();
@@ -43,34 +65,33 @@ public class ServerApp {
 
           // 클라이언트의 요청 읽기
           String request = in.readLine();
-
+          
           if (request.equalsIgnoreCase("stop")) {
             System.out.println("종료합니다.");
             break;
           }
-
-          //클라이언트에게 응답하기
+          
+          // 클라이언트에게 응답하기
           Command commandHandler = (Command) context.get(request);
-
+          
           if (commandHandler == null) {
             out.println("실행할 수 없는 명령입니다.");
             out.println("!end!");
             out.flush();
             continue;
           }
-
+          
           commandHandler.execute(in, out);
-
+          
           out.println("!end!");
           out.flush();
 
         } catch (Exception e) {
           System.out.println("명령어 실행 중 오류 발생 : " + e.toString());
           e.printStackTrace();
-
         } // try(Socket)
+        
       } // while
-
 
       // 애플리케이션을 종료할 때, 등록된 리스너에게 알려준다.
       for (ApplicationContextListener listener : listeners) {

@@ -108,7 +108,7 @@ select
     (select name from memb where mno=la.mno) as stud_name,
     lec.titl,
     lec.room_name,
-    lec.manager_no,
+   -- lec.manager_no,
     lec.manager_name,
     lec.manager_posi
 from lect_appl la 

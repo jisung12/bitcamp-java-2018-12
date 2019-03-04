@@ -1,4 +1,4 @@
-// Statement와 SQL 삽입 공격
+// Statement 와 SQL 삽입 공격
 package ch25.c;
 
 import java.sql.Connection;
@@ -8,20 +8,24 @@ import java.util.Scanner;
 
 public class Test01 {
 
-  static Scanner keyboard = new Scanner(System.in);
-  
   public static void main(String[] args) {
-    try (Connection con = DriverManager.getConnection(
-        "jdbc:mariadb://localhost/bitcampdb?user=bitcamp&password=1111")) {
-      
+    String no = null;
+    String title = null;
+    String contents = null;
+
+    try (Scanner keyboard = new Scanner(System.in)) {
       System.out.print("번호? ");
-      int no = Integer.parseInt(keyboard.nextLine());
+      no = keyboard.nextLine();
       
       System.out.print("제목? ");
-      String title = keyboard.nextLine();
+      title = keyboard.nextLine();
       
       System.out.print("내용? ");
-      String contents = keyboard.nextLine();
+      contents = keyboard.nextLine();
+    }
+    
+    try (Connection con = DriverManager.getConnection(
+        "jdbc:mariadb://localhost/bitcampdb?user=bitcamp&password=1111")) {
       
       try (Statement stmt = con.createStatement()) {
         
@@ -32,16 +36,26 @@ public class Test01 {
         // 번호? 1
         // 제목? okok
         // 내용? test', view_count = 300, created_date = '2019-3-3
+        // 
+        int count = stmt.executeUpdate(
+            "update x_board set title = '" + title
+            + "', contents = '" + contents + "'"
+            + " where board_id = " + no);
         
-        stmt.executeUpdate("update x_board set title = '"+title+"' where board_id="+no);
-        stmt.executeUpdate("update x_board set contents = '"+contents+"' where board_id="+no);
-        System.out.println("입력 완료");
         // 위에서 사용자가 입력한 값을 가지고 SQL 문장을 만들면 다음과 같다.
+        //
         // update x_board set title = 'okok', 
-        // contents = 'test', view_count = 300, created_date = '2019-3-3' 
+        // contents = 'test', view_count = 300, created_date = '2019-3-3'
         // where board_id = 1
+        //
+        
+        if (count == 0) {
+          System.out.println("해당 번호의 게시물이 존재하지 않습니다.");
+        } else {
+          System.out.println("변경하였습니다.");
+        }
       }
-
+      
     } catch (Exception e) {
       e.printStackTrace();
     }

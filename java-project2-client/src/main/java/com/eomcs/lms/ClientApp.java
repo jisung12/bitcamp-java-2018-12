@@ -17,7 +17,7 @@ public class ClientApp {
   Queue<String> commandHistory2 = new LinkedList<>();
 
   public void service() throws Exception {
-
+    
     while (true) {
       String input = prompt();
       
