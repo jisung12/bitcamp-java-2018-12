@@ -1,4 +1,4 @@
-// dynamic SQL 다루기 - ${}를 안전하게 사용하는 방법 
+// dynamic SQL 다루기 - #{} 와 ${} 사용법
 package ch26.f;
 
 import java.io.InputStream;
@@ -10,7 +10,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class Test07_2 {
+public class Test07 {
 
   public static void main(String[] args) throws Exception {
     
@@ -27,34 +27,30 @@ public class Test07_2 {
     Scanner keyboard = new Scanner(System.in);
     System.out.print("정렬할 컬럼? ");
     String column = keyboard.nextLine();
-    
     if (column.length() > 0) {
-      // 사용자가 입력한 값을 그대로 컬럼명으로 지정하지 않고 
-      // 다음과 같이 자바 코드로 컬럼명을 지정한다.
-      switch (column) {
-        case "title":
-        case "contents":
-        case "created_date":
-        case "view_count": 
-          params.put("column", column);
-          break;
-        default:
-          params.put("column", "board_id");
-      }
-
-      System.out.print("정렬방식? ");
-      String sort = "asc";
-      if (keyboard.nextLine().equalsIgnoreCase("desc")) {
-        sort = "desc";
-      }
+      params.put("column", column);
+    }
+    
+    System.out.print("정렬방식? ");
+    String sort = keyboard.nextLine();
+    if (sort.length() > 0) {
       params.put("sort", sort);
     }
     
     keyboard.close();
     
-    // Test07 클래스와 달리 정렬할 컬럼의 이름과 정렬 방식에 대한 SQL 코드는 
-    // 자바의 코드로 지정한 것이다.
-    // 따라서 잘못된 SQL 코드가 삽입되는 것을 방지할 수 있다. 
+    // 정렬할 컬럼 이름과 정렬 방식(asc 또는 desc)을 값을 전달할 수 없다.
+    //List<Board> boards = sqlSession.selectList("board.select7_error", params);
+    
+    // 컬럼 이름과 정렬 방식과 같은 SQL 키워드를 값으로 전달하려면 
+    // SQL 매퍼 파일에서 #{프로퍼티명} 대신에 ${프로퍼티명} 문법을 사용해야 한다.
+    // 즉 SQL 코드를 직접 삽입하는 것이다. 
+    // 문제는 사용자가 입력한 값을 직접 전달하게 되면 "SQL 삽입 공격"에 노출되므로 
+    // 절대 직접 전달해서는 안된다. 
+    // 다음 Test07_2 클래스와 같이 자바 코드에서 만든 값을 전달하라!
+    
+    // 이 예제는 사용자가 입력한 값을 그대로 SQL 코드에 삽입하는 예이다.
+    // => SQL 삽입 공격이 가능한 상황이다.
     List<Board> boards = sqlSession.selectList("board.select7_ok", params);
     
     for (Board b : boards) {

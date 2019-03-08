@@ -1,4 +1,4 @@
-// SQL을 실행할 때 파라미터 값 넘기기
+// dynamic SQL 다루기 - 조건문 II
 package ch26.f;
 
 import java.io.InputStream;
@@ -21,6 +21,8 @@ public class Test02 {
     
     SqlSession sqlSession = sqlSessionFactory.openSession();
  
+    // 조건문 사용하기
+    // => 파라미터 값을 맵 객체에 담아 전달하기
     Scanner keyboard = new Scanner(System.in);
     System.out.print("게시물 번호? ");
     String value = keyboard.nextLine();
@@ -30,6 +32,8 @@ public class Test02 {
     
     try {
       params.put("no", Integer.parseInt(value));
+      // 숫자로 바꿀 수 있으면 맵에 "no" 이름으로 값이 저장될 것이고,
+      // 숫자로 바꿀 수 없으면 맵에 "no" 이름의 값이 없을 것이다.
     } catch (Exception e) {
     }
     

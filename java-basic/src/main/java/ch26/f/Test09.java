@@ -1,4 +1,4 @@
-// SQL을 실행할 때 파라미터 값 넘기기
+// dynamic SQL 다루기 - <foreach> 태그 사용법
 package ch26.f;
 
 import java.io.InputStream;
@@ -14,24 +14,23 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 public class Test09 {
 
   public static void main(String[] args) throws Exception {
-
+    
     InputStream inputStream = Resources.getResourceAsStream(
         "ch26/f/mybatis-config.xml");
     SqlSessionFactory sqlSessionFactory =
-        new SqlSessionFactoryBuilder().build(inputStream);
-
+      new SqlSessionFactoryBuilder().build(inputStream);
+    
     SqlSession sqlSession = sqlSessionFactory.openSession();
-
-
+ 
     ArrayList<Integer> noList = new ArrayList<>();
-
+    
     Scanner keyboard = new Scanner(System.in);
-
-    while(true) {
+    
+    while (true) {
       try {
         System.out.print("조회할 게시물 번호? ");
         String value = keyboard.nextLine();
-        if(value.length() == 0) {
+        if (value.length() == 0) {
           break;
         }
         noList.add(Integer.valueOf(value));
@@ -39,26 +38,19 @@ public class Test09 {
         break;
       }
     }
-
-    //    System.out.print("정렬 방식? ");
-    //    String sort = keyboard.nextLine();
-    //    if(sort.length() > 0) {
-    //      params.put("sort", sort);
-    //    }
-
+    
     keyboard.close();
-
-
-    HashMap<String, Object> params = new HashMap<>();
+    
+    HashMap<String,Object> params = new HashMap<>();
     params.put("noList", noList);
     
     List<Board> boards = sqlSession.selectList("board.select9", params);
-
+    
     for (Board b : boards) {
       System.out.println(b);
     }
     System.out.println("-------------------------------");
-
+    
   }
 
 }

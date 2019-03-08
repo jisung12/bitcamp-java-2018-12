@@ -1,19 +1,16 @@
-// 11단계: 멀티 스레드 상황에서 DB 커넥션을 공유할 때의 문제점과 그 해결책 II
-// => 같은 스레드를 통해 DAO 작업을 수행할 때 같은 커넥션 객체 사용하기.
-// => 어떻게?
-//    "스레드 로컬(thread local) 변수"를 이용하여 커넥션 객체를 스레드에 보관한다.
-//    DAO가 작업을 할 때 스레드에 보관된 커넥션 객체를 이용한다.
+// 13단계: Mybatis 퍼시스턴스 프레임워크 적용하기
+// => 자바 소스 코드에서 SQL을 분리하여 별도의 파일에서 관리한다.
+// => JDBC 코드를 캡슐화하여 DB 프로그래밍을 간결하게 한다.
 // 
 // 작업:
-// 1) ConnectionFactory 변경
-//    => create()를 호출할 때 먼저 스레드에 저장된 것이 있는지 검사한 후 
-//       있으면 그 커넥션 객체를 리턴하고,
-//       없으면 새 커넥션을 만들어 리턴한다.
-//    => commit()/rollback()을 사용하려면 커넥션의 auto commit을 false로 설정해야 한다.
-// 2) AbstractCommand 변경 
-//    => execute()에 commit()과 rollback()을 적용한다.
-// 3) Command 구현체 변경
-//    => Command에서 커넥션 객체를 사용한 후 닫지 않도록 한다.
+// 1) Mybatis 설정 파일 준비
+//    - src/main/resources/com/eomcs/lms/conf/mybatis-config.xml 생성
+//    - src/main/resources/com/eomcs/lms/conf/jdbc.properties 생성
+// 2) LessonDao에 Mybatis 적용
+//    - src/main/resources/com/eomcs/lms/mapper/LessonMapper.xml 생성
+//    - LessonDaoImpl 클래스 변경
+//    - ApplicationInitializer 클래스 변경
+// 
 // 
 package com.eomcs.lms;
 import java.io.BufferedReader;
@@ -21,13 +18,10 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.eomcs.lms.context.ApplicationContextListener;
 import com.eomcs.lms.handler.Command;
-import com.eomcs.util.DataSource;
 
 public class ServerApp {
 
@@ -44,7 +38,7 @@ public class ServerApp {
   public void service() throws Exception {
 
     try (ServerSocket ss = new ServerSocket(8888)) {
-
+      
 
       // 애플리케이션을 시작할 때, 등록된 리스너에게 알려준다.
       for (ApplicationContextListener listener : listeners) {
@@ -52,7 +46,7 @@ public class ServerApp {
       }
 
       System.out.println("서버 실행 중...");
-
+      
       while (true) {
         new RequestHandlerThread(ss.accept()).start();
       } // while
@@ -64,14 +58,14 @@ public class ServerApp {
       for (ApplicationContextListener listener : listeners) {
         listener.contextDestroyed(context);
       }
-       */
+      */
 
     } catch (Exception e) {
       e.printStackTrace();
     } // try(ServerSocket)
 
   }
-
+  
   public static void main(String[] args) throws Exception {
     ServerApp app = new ServerApp();
 
@@ -81,27 +75,21 @@ public class ServerApp {
     // App 을 실행한다.
     app.service();
   }
-
+  
   // 바깥 클래스(ServerApp)의 인스턴스 필드를 사용해야 한다면 
   // Inner 클래스(non-static nested class)로 정의하라!
   // 
   class RequestHandlerThread extends Thread {
-
+    
     Socket socket;
-
+    
     public RequestHandlerThread(Socket socket) {
       this.socket = socket;
     }
-
+    
     @Override
     public void run() {
-
-      // DB 커넥션을 빌려줄 커넥션풀을 꺼낸다.
-      DataSource dataSource = (DataSource) context.get("dataSource");
-
-      // 커넥션풀에서 현재 스레드가 사용할 커넥션 객체를 빌린다.
-      Connection con = dataSource.getConnection();
-
+      
       try (Socket socket = this.socket;
           BufferedReader in = new BufferedReader(
               new InputStreamReader(socket.getInputStream()));
@@ -109,51 +97,36 @@ public class ServerApp {
 
         // 클라이언트의 요청 읽기
         String request = in.readLine();
-
+        
         // 클라이언트에게 응답하기
         Command commandHandler = (Command) context.get(request);
-
+        
         if (commandHandler == null) {
           out.println("실행할 수 없는 명령입니다.");
           out.println("!end!");
           out.flush();
           return;
         }
-
+        
         try {
           commandHandler.execute(in, out);
-          // 클라이언트 요청을 처리한 후 커넥션을 통해 작업한 것을 최종 완료한다.
-          con.commit();
-          System.out.println("DB 커넥션에 대해 commit 수행");
-        } catch(Exception e) {
-          // 만약 클라이언트 요청을 처리하는 동안에 예외가 발생했다면 
-          // 커넥션을 통해 수행했던 모든 데이터 변경 작업을 취소한다.
-          try {
-            con.rollback();
-            System.out.println("DB 커넥션에 대해 rollback 수행");
-          } catch (SQLException e1) {
-            // rollback() 하다가 발생된 예외는 무시한다. 따로 처리할 방법이 없다.
-          }
+        } catch (Exception e) {
           out.printf("실행 오류! : %s\n", e.getMessage());
         }
+        
         out.println("!end!");
         out.flush();
-
+        
       } catch (Exception e) {
         System.out.println("명령어 실행 중 오류 발생 : " + e.toString());
         e.printStackTrace();
-      } finally {
-        // 클라이언트 요청을 모두 처리했으면 DB 커넥션 객체를 커넥션풀에 반납한다.
-        // 커넥션 객체를 close()하면 안된다.
-        // 다음에 다시 사용해야 하기 때문에.
-        dataSource.returnConnection(con);
-        System.out.println("DB 커넥션을 커넥션풀에 반납");
+        
       }
     }
   }
-
-
-
+  
+  
+  
 }
 
 

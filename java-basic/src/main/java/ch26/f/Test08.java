@@ -1,9 +1,8 @@
-// SQL을 실행할 때 파라미터 값 넘기기
+// dynamic SQL 다루기 - <set> 태그 사용법
 package ch26.f;
 
 import java.io.InputStream;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -23,6 +22,7 @@ public class Test08 {
  
     HashMap<String,Object> params = new HashMap<>();
 
+    
     Scanner keyboard = new Scanner(System.in);
     System.out.print("번호? ");
     int no = Integer.parseInt(keyboard.nextLine());
@@ -30,19 +30,19 @@ public class Test08 {
     
     System.out.print("제목? ");
     String value = keyboard.nextLine();
-    if(value.length() > 0) {
+    if (value.length() > 0) {
       params.put("title", value);
     }
     
     System.out.print("내용? ");
     value = keyboard.nextLine();
-    if(value.length() > 0) {
+    if (value.length() > 0) {
       params.put("contents", value);
     }
     
     keyboard.close();
     
-    Board board = sqlSession.selectOne("board.select1",no);
+    Board board = sqlSession.selectOne("board.select1", no);
     System.out.println("[변경 전]");
     System.out.println(board);
     
@@ -50,11 +50,9 @@ public class Test08 {
     sqlSession.commit();
     System.out.println(count);
     
-    board = sqlSession.selectOne("board.select1",no);
+    board = sqlSession.selectOne("board.select1", no);
     System.out.println("[변경 후]");
     System.out.println(board);
-    
-    System.out.println("-------------------------------");
     
   }
 

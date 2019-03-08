@@ -1,4 +1,4 @@
-// SQL을 실행할 때 파라미터 값 넘기기
+// dynamic SQL 다루기 - <where> 태그 사용 전
 package ch26.f;
 
 import java.io.InputStream;
@@ -23,6 +23,7 @@ public class Test03 {
  
     HashMap<String,Object> params = new HashMap<>();
 
+    // 여러 개의 조건으로 검색하기
     Scanner keyboard = new Scanner(System.in);
     System.out.print("게시물 번호? ");
     String value = keyboard.nextLine();
@@ -33,13 +34,13 @@ public class Test03 {
     
     System.out.print("제목? ");
     value = keyboard.nextLine();
-    if(value.length() > 0) {
+    if (value.length() > 0) {
       params.put("title", value);
     }
     
     System.out.print("내용? ");
     value = keyboard.nextLine();
-    if(value.length() > 0) {
+    if (value.length() > 0) {
       params.put("contents", value);
     }
     

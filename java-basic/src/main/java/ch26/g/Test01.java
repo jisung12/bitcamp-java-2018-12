@@ -1,8 +1,7 @@
-// SQL을 실행할 때 파라미터 값 넘기기
+// dynamic SQL 다루기 - <sql> 태그 사용법
 package ch26.g;
 
 import java.io.InputStream;
-import java.util.List;
 import java.util.Scanner;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -25,17 +24,8 @@ public class Test01 {
     String keyword = keyboard.nextLine();
     keyboard.close();
     
-    List<Board> boards = null;
-    
-    try {
-      boards = sqlSession.selectList("board.select1", Integer.parseInt(keyword));
-    } catch (Exception e) {
-      boards = sqlSession.selectList("board.select1");
-    }
-    
-    for (Board b : boards) {
-      System.out.println(b);
-    }
+    Board board = sqlSession.selectOne("board.select1", Integer.parseInt(keyword));
+    System.out.println(board);
     System.out.println("-------------------------------");
     
   }
