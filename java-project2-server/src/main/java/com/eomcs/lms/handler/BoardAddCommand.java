@@ -12,7 +12,8 @@ public class BoardAddCommand extends AbstractCommand {
   
   @Override
   public void execute(Response response) throws Exception {
-    Board board = new Board();
+    
+     Board board = new Board();
     board.setContents(response.requestString("내용?"));
     boardDao.insert(board);
     
