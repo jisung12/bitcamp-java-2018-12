@@ -1,17 +1,17 @@
-// 13단계: Mybatis 퍼시스턴스 프레임워크 적용하기
-// => 자바 소스 코드에서 SQL을 분리하여 별도의 파일에서 관리한다.
-// => JDBC 코드를 캡슐화하여 DB 프로그래밍을 간결하게 한다.
+// 16단계: DAO 구현체 자동 생성하기
+// => java.lang.reflect.Proxy 를 이용하여 DAO 인터페이스를 구현한 객체를 자동으로 생성한다.
 // 
 // 작업:
-// 1) Mybatis 설정 파일 준비
-//    - src/main/resources/com/eomcs/lms/conf/mybatis-config.xml 생성
-//    - src/main/resources/com/eomcs/lms/conf/jdbc.properties 생성
-// 2) LessonDao에 Mybatis 적용
-//    - src/main/resources/com/eomcs/lms/mapper/LessonMapper.xml 생성
-//    - LessonDaoImpl 클래스 변경
-//    - ApplicationInitializer 클래스 변경
-// 
-// 
+// 1) DaoInvocationHandler 생성
+//    => 실제 DAO 작업을 수행할 InvocationHandler 구현체를 만든다.
+// 2) ApplicationInitializer 변경
+//    => 기존에 생성한 DAO 구현체 대신 Proxy.newProxyInstance()가 생성한 DAO 구현체를 사용한다.
+// 3) 매퍼 파일 변경
+//    => namespace 이름을 DAO 인터페이스 이름(패키지명 포함)으로 변경한다.
+//    => SQL ID 는 반드시 메서드명과 일치시킨다.
+// 4) DaoFactory 생성
+//    => DAO 구현체를 생성해주는 역할 수행.
+//    => DaoInvocationHandler를 DaoFactory의 inner 클래스로 전환한다.
 package com.eomcs.lms;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -20,6 +20,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.HashMap;
+import com.eomcs.lms.context.ApplicationContext;
 import com.eomcs.lms.context.ApplicationContextListener;
 import com.eomcs.lms.handler.Command;
 
@@ -30,6 +31,9 @@ public class ServerApp {
 
   // 공용 객체를 보관하는 저장소
   HashMap<String,Object> context = new HashMap<>();
+  
+  // Command 객체와 그와 관련된 객체를 보관하고 있는 빈 컨테이너
+  ApplicationContext beanContainer;
 
   public void addApplicationContextListener(ApplicationContextListener listener) {
     listeners.add(listener);
@@ -45,6 +49,9 @@ public class ServerApp {
         listener.contextInitialized(context);
       }
 
+      // ApplicationInitializer가 준비한 ApplicationContext를 꺼낸다.
+      beanContainer = (ApplicationContext)context.get("applicationContext");
+      
       System.out.println("서버 실행 중...");
       
       while (true) {
@@ -99,7 +106,8 @@ public class ServerApp {
         String request = in.readLine();
         
         // 클라이언트에게 응답하기
-        Command commandHandler = (Command) context.get(request);
+        // => 클라이언트 요청을 처리할 객체는 빈 컨테이너에서 꺼낸다.
+        Command commandHandler = (Command) beanContainer.getBean(request);
         
         if (commandHandler == null) {
           out.println("실행할 수 없는 명령입니다.");
@@ -112,6 +120,7 @@ public class ServerApp {
           commandHandler.execute(in, out);
         } catch (Exception e) {
           out.printf("실행 오류! : %s\n", e.getMessage());
+          e.printStackTrace();
         }
         
         out.println("!end!");
@@ -124,14 +133,6 @@ public class ServerApp {
       }
     }
   }
-  
-  
-  
-  
-  
-  
-  
-  
   
   
   
