@@ -15,7 +15,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 // 의존 객체가 없다면 그 의존 객체가 생성될 때까지 
 // 별도로 담아 둔다.
 // 의존 객체가 생성되는 순간 즉시 별도로 담아 둔 그 객체에 대해 셋터를 호출할 것이다.
-//
+
 public class MyAutowiredAnnotationBeanPostProcessor implements BeanPostProcessor {
   
   // 생성된 모든 객체를 기록한다.
