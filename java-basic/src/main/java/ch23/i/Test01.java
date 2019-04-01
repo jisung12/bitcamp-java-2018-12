@@ -2,6 +2,7 @@
 package ch23.i;
 
 import java.util.Base64;
+import java.util.Base64.Decoder;
 import java.util.Base64.Encoder;
 
 public class Test01 {
@@ -24,11 +25,21 @@ public class Test01 {
     //    16을 Base64 코드표에 따라 문자로 바꾸면 ==> Q
     //    20을 Base64 코드표에 따라 문자로 바꾸면 ==> U
     //    ....
-    //   
-    
+    //   이런 식으로 문자열을 Base64로 바꾸면 결과는 다음과 같다.
+    //   QUJDMDEy6rCA6rCB6rCE
     Encoder encoder = Base64.getEncoder();
     byte[] base64Bytes = encoder.encode(bytes);
     
     System.out.println(new String(base64Bytes));
+    
+    // Base64 디코딩
+    // => Base64 코드를 원래의 바이너리 값으로 변환한다.
+    //
+    Decoder decoder = Base64.getDecoder();
+    byte[] bytes2 = decoder.decode(base64Bytes);
+    
+    System.out.println(new String(bytes2, "UTF-8"));
+    
+    
   }
 }

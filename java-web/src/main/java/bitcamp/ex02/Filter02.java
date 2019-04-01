@@ -8,17 +8,17 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 
-// 서블릿 컨테이너가 관리하는 컴포넌트 
+// 서블릿 컨테이너가 관리하는 컴포넌트
 // => 서블릿, 필터, 리스너
 // 
 // 필터 만들기
 // => javax.servlet.Filter 인터페이스 규칙에 따라 작성한다.
 //
 // 필터 배포하기
-// => DD(web.xml) 파일에 설정하거나 애노테이션으로 설정하면 된다.
+// => DD 파일(web.xml)에 설정하거나 애노테이션으로 설정하면 된다.
 // 
 public class Filter02 implements Filter {
- 
+  
   @Override
   public void init(FilterConfig filterConfig) throws ServletException {
     // 필터 객체를 생성한 후 제일 처음으로 호출된다.
@@ -35,9 +35,9 @@ public class Filter02 implements Filter {
   
   @Override
   public void doFilter(
-      ServletRequest request, 
-      ServletResponse response, 
-      FilterChain chain)
+        ServletRequest request, 
+        ServletResponse response, 
+        FilterChain chain)
       throws IOException, ServletException {
     // 요청이 들어 올 때 마다 호출된다.
     // => 단 필터를 설정할 때 지정된 URL의 요청에만 호출된다.
@@ -52,7 +52,6 @@ public class Filter02 implements Filter {
     System.out.println("Filter02.doFilter() : 종료");
   }
 }
-
 
 
 
