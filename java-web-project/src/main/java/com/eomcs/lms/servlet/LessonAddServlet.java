@@ -70,7 +70,6 @@ public class LessonAddServlet extends HttpServlet {
       throws ServletException, IOException {
     
     request.setCharacterEncoding("UTF-8");
-    
     LessonService lessonService = InitServlet.iocContainer.getBean(LessonService.class);
     
     Lesson lesson = new Lesson();
