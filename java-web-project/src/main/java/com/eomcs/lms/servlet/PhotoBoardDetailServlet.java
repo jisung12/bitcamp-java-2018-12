@@ -1,18 +1,13 @@
 package com.eomcs.lms.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Component;
-import com.eomcs.lms.ServerApp;
-import com.eomcs.lms.context.RequestMapping;
+import com.eomcs.lms.InitServlet;
 import com.eomcs.lms.domain.PhotoBoard;
 import com.eomcs.lms.domain.PhotoFile;
 import com.eomcs.lms.service.PhotoBoardService;
@@ -25,7 +20,7 @@ public class PhotoBoardDetailServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     
-    PhotoBoardService photoBoardService = ServerApp.iocContainer.getBean(PhotoBoardService.class);
+    PhotoBoardService photoBoardService = InitServlet.iocContainer.getBean(PhotoBoardService.class);
     
     int no = Integer.parseInt(request.getParameter("no"));
     

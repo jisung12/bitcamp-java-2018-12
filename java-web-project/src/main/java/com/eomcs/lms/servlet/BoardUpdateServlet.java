@@ -1,17 +1,12 @@
 package com.eomcs.lms.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.springframework.stereotype.Component;
-import com.eomcs.lms.ServerApp;
-import com.eomcs.lms.context.RequestMapping;
+import com.eomcs.lms.InitServlet;
 import com.eomcs.lms.domain.Board;
 import com.eomcs.lms.service.BoardService;
 
@@ -23,7 +18,7 @@ public class BoardUpdateServlet extends HttpServlet {
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     
-    BoardService boardService = ServerApp.iocContainer.getBean(BoardService.class);
+    BoardService boardService = InitServlet.iocContainer.getBean(BoardService.class);
 
     Board board = new Board();
     board.setNo(Integer.parseInt(request.getParameter("no")));
