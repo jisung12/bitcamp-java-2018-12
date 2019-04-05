@@ -31,8 +31,14 @@ public class PhotoBoardDetailServlet extends HttpServlet {
         iocContainer.getBean(PhotoBoardService.class);
     LessonService lessonService = 
         iocContainer.getBean(LessonService.class);
-    
+
     response.setContentType("text/html;charset=UTF-8");
+
+    // JSP가 사용할 수 있도록 ServletRequest 보관소에 저장해둔다.
+    request.setAttribute("photoboard", photoBoard);
+
+    // JSP의 실행을 포함시킨다.
+    request.getRequestDispatcher("/photoboard/detail.jsp").include(request, response);
 
     int no = Integer.parseInt(request.getParameter("no"));
 
@@ -42,6 +48,10 @@ public class PhotoBoardDetailServlet extends HttpServlet {
     out.println("<html>");
     out.println("<head><title>사진 조회</title></head>");
     out.println("<body>");
+
+    // 헤더를 출력한다.
+    request.getRequestDispatcher("/header").include(request, response);
+
     out.println("<h1>사진 조회</h1>");
 
     if (board == null) {
@@ -66,25 +76,25 @@ public class PhotoBoardDetailServlet extends HttpServlet {
       out.println("  <th>조회수</th>");
       out.printf("  <td>%d</td>\n", board.getViewCount());
       out.println("</tr>");
-      
+
       out.println("<tr>");
       out.println("  <th>수업</th>");
       out.println("  <td><select name='lessonNo'>");
-      
+
       List<Lesson> lessons = lessonService.list();
       for (Lesson lesson : lessons) {
         out.printf("      <option value='%d' %s>%s(%s ~ %s)</option>\n", 
             lesson.getNo(), 
             board.getLessonNo() == lesson.getNo() ? "selected" : "",
-            lesson.getTitle(),
-            lesson.getStartDate(), 
-            lesson.getEndDate());
+                lesson.getTitle(),
+                lesson.getStartDate(), 
+                lesson.getEndDate());
       }
-      
+
       out.println("  </select></td>");
       out.println("</tr>");      
-      
-      
+
+
       out.println("<tr>");
       out.println("  <td colspan='2'>최소 한 개의 사진 파일을 등록해야 합니다.</td>");
       out.println("</tr>");

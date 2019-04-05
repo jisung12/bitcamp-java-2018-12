@@ -29,67 +29,11 @@ public class MemberDetailServlet extends HttpServlet {
     Member member = memberService.get(no);
 
     response.setContentType("text/html;charset=UTF-8");
-    PrintWriter out = response.getWriter();
-    out.println("<html><head><title>회원 조회</title></head>");
-    out.println("<body><h1>회원 조회</h1>");
 
-    if (member == null) {
-      out.println("<p>해당 번호의 회원이 없습니다.</p>");
-    } else {
-      out.println("<form action='update' method='post' enctype='multipart/form-data'>");
-      out.println("<table border='1'>");
-      out.println("<tr>");
-      out.println("  <th>번호</th>");
-      out.printf("  <td><input type='text' name='no' readonly value='%d'></td>\n", no);
-      out.println("</tr>");
-      out.println("<tr>");
-      out.println("  <th>이름</th>");
-      out.printf("  <td><input type='text' name='name' value='%s'></td>\n",
-          member.getName());
-      out.println("</tr>");
-      out.println("<tr>");
-      out.println("  <th>이메일</th>");
-      out.printf("  <td><input type='email' name='email' value='%s'></td>\n",
-          member.getEmail());
-      out.println("</tr>");
-      out.println("<tr>");
-      out.println("  <th>암호</th>");
-      out.println("  <td><input type='password' name='password'></td>");
-      out.println("</tr>");
-      
-      out.println("<tr>");
-      out.println("  <th>사진</th>");
-      
-      out.println("  <td>");
-      if (member.getPhoto() == null) {
-        out.printf("<img src='../images/default.jpg' style='height:80px'>",
-            member.getPhoto());
-      } else {
-        out.printf("<img src='../upload/member/%s' style='height:80px'>",
-          member.getPhoto());
-      }
-      out.println("<input type='file' name='photo'></td>\n");
-      
-      out.println("</tr>");
-      
-      out.println("<tr>");
-      out.println("  <th>전화</th>");
-      out.printf("  <td><input type='text' name='tel' value='%s'></td>\n",
-          member.getTel());
-      out.println("</tr>");
-      out.println("<tr>");
-      out.println("  <th>가입일</th>");
-      out.printf("  <td>%s</td>\n",
-          member.getRegisteredDate());
-      out.println("</tr>");
-      out.println("</table>");
-      out.println("<p><a href='list'>목록</a>"
-          + " <a href='delete?no=" + member.getNo() + "'>삭제</a>"
-          + " <button type='submit'>변경</button>"
-          + "<p>");
-      out.println("</form>");
-    }
-    out.println("</body>");
-    out.println("</html>");
+    // JSP가 사용할 수 있도록 ServletRequest 보관소에 저장해둔다.
+    request.setAttribute("member", member);
+
+    // JSP의 실행을 포함시킨다.
+    request.getRequestDispatcher("/member/detail.jsp").include(request, response);
   }
 }
