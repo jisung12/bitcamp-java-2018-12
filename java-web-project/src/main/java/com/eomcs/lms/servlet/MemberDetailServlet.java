@@ -1,6 +1,5 @@
 package com.eomcs.lms.servlet;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,20 +19,17 @@ public class MemberDetailServlet extends HttpServlet {
       throws ServletException, IOException {
 
     ServletContext sc = this.getServletContext();
-    ApplicationContext iocContainer = 
-        (ApplicationContext) sc.getAttribute("iocContainer");
+    ApplicationContext iocContainer = (ApplicationContext) sc.getAttribute("iocContainer");
     MemberService memberService = iocContainer.getBean(MemberService.class);
 
     int no = Integer.parseInt(request.getParameter("no"));
 
     Member member = memberService.get(no);
 
+    request.setAttribute("member", member);
+    
     response.setContentType("text/html;charset=UTF-8");
 
-    // JSP가 사용할 수 있도록 ServletRequest 보관소에 저장해둔다.
-    request.setAttribute("member", member);
-
-    // JSP의 실행을 포함시킨다.
     request.getRequestDispatcher("/member/detail.jsp").include(request, response);
   }
 }

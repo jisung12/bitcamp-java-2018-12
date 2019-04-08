@@ -2,22 +2,17 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"
   trimDirectiveWhitespaces="true"%>
-<%
-  List<PhotoBoard> list = (List<PhotoBoard>) request.getAttribute("list");
-  String contextRootPath = application.getContextPath();
-%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>게시물 목록</title>
+<title>사진 목록</title>
 </head>
 <body>
-
   <jsp:include page="/header.jsp" />
-
-  <h1>사진 목록(JSP)</h1>
+  <h1>사진 목록(JSP2)</h1>
+  <jsp:useBean scope="request" id="list" type="java.util.List<PhotoBoard>"/>
   <p>
-    <a href='add'>사진 추가</a>
+    <a href='add'>새 사진</a>
   </p>
   <table border='1'>
     <tr>
@@ -25,30 +20,32 @@
       <th>제목</th>
       <th>등록일</th>
       <th>조회수</th>
-      <th>수업 번호</th>
+      <th>수업</th>
     </tr>
-    <%
-      for (PhotoBoard photoBoards : list) {
-    %>
+ 
+    <%for (PhotoBoard board : list) {%>
     <tr>
-      <td><%=photoBoards.getNo()%></td>
-      <td><a href='detail?no=<%=photoBoards.getNo()%>'><%=photoBoards.getTitle()%></a></td>
-      <td><%=photoBoards.getCreatedDate()%></td>
-      <td><%=photoBoards.getViewCount()%></td>
-      <td><%=photoBoards.getLessonNo()%></td>
+      <td><%=board.getNo() %></td>
+      <td><a href='detail?no=<%=board.getNo()%>'><%=board.getTitle() %></a></td>
+      <td><%=board.getCreatedDate() %></td>
+      <td><%=board.getViewCount() %></td>
+      <td><%=board.getLessonNo() %></td>
     </tr>
-    <%
-      }
-    %>
+    <%} %>
   </table>
-  
+
   <form action='search'>
-    수업번호: <input type='number' name='lessonNo'> 검색어: <input type='text' name='searchWord'>
+    수업번호: <input type='text' name='lessonNo'> 검색어: 
+    <input type='text' name='keyword'>
     <button type='submit'>검색</button>
   </form>
-  <a href='<%=contextRootPath%>/index.html'>처음화면</a>
+
 </body>
 </html>
+
+
+
+
 
 
 

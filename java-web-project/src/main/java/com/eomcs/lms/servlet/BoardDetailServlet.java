@@ -1,6 +1,5 @@
 package com.eomcs.lms.servlet;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,15 +30,15 @@ public class BoardDetailServlet extends HttpServlet {
     
     Board board = boardService.get(no);
     
-    response.setContentType("text/html;charset=UTF-8");
-    
     // JSP가 사용할 수 있도록 ServletRequest 보관소에 저장해둔다.
     request.setAttribute("board", board);
     
+    response.setContentType("text/html;charset=UTF-8");
+    
     // JSP의 실행을 포함시킨다.
     request.getRequestDispatcher("/board/detail.jsp").include(request, response);
-    
   }
+
 }
 
 

@@ -1,6 +1,5 @@
 package com.eomcs.lms.servlet;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -35,7 +34,6 @@ public class BoardListServlet extends HttpServlet {
     request.setAttribute("list", boards);
     
     response.setContentType("text/html;charset=UTF-8");
-    
     
     // JSP의 실행을 포함시킨다.
     RequestDispatcher rd = request.getRequestDispatcher("/board/list.jsp");

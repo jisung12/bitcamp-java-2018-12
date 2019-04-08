@@ -21,7 +21,6 @@ public class LessonAddServlet extends HttpServlet {
       throws ServletException, IOException {
 
     response.setContentType("text/html;charset=UTF-8");
-    
     request.getRequestDispatcher("/lesson/form.jsp").include(request, response);
   }
 

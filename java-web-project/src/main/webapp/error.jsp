@@ -11,7 +11,7 @@
 out.flush();
 request.getRequestDispatcher("/header").include(request, response);
 %>
-  <h1><%=request.getAttribute("error.title") %></h1>
-  <p><%=request.getAttribute("error.content") %></p>
+  <h1><%=request.getAttribute("error.title")%></h1>
+  <p><%=request.getAttribute("error.content")%>
 </body>
 </html>
