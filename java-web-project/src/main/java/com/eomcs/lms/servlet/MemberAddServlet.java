@@ -17,27 +17,27 @@ import com.eomcs.lms.service.MemberService;
 @SuppressWarnings("serial")
 @WebServlet("/member/add")
 public class MemberAddServlet extends HttpServlet {
-  
+
   @Override
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/member/form.jsp").include(request, response);
+    // 뷰 컴포넌트의 URL을 ServletRequest 보관소에 저장한다.
+    request.setAttribute("viewUrl","/member/form.jsp");
   }
-  
+
   @Override
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     ServletContext sc = this.getServletContext();
     ApplicationContext iocContainer = (ApplicationContext) sc.getAttribute("iocContainer");
     MemberService memberService = iocContainer.getBean(MemberService.class);
-    
+
     Member member = new Member();
     member.setName(request.getParameter("name"));
     member.setEmail(request.getParameter("email"));
     member.setPassword(request.getParameter("password"));
     member.setTel(request.getParameter("tel"));
-    
+
     Part photo = request.getPart("photo");
     if (photo.getSize() > 0) {
       String filename = UUID.randomUUID().toString();
@@ -48,8 +48,9 @@ public class MemberAddServlet extends HttpServlet {
     }
 
     memberService.add(member);
-    
-    response.sendRedirect("list");
+
+    // 뷰 컴포넌트의 URL을 ServletRequest 보관소에 저장한다.
+    request.setAttribute("viewUrl","redirect:list");
   }
 
 }

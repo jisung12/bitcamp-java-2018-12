@@ -27,12 +27,11 @@ public class MemberSearchServlet extends HttpServlet {
     
     List<Member> members = memberService.list(keyword);
 
-    response.setContentType("text/html;charset=UTF-8");
     
-    request.setAttribute("members", members);
+    request.setAttribute("list", members);
     
-    request.getRequestDispatcher("/member/search.jsp").include(request, response);
-    
+ // 뷰 컴포넌트의 URL을 ServletRequest 보관소에 저장한다.
+    request.setAttribute("viewUrl","/member/search.jsp");    
 
   }
   

@@ -13,33 +13,35 @@ import com.eomcs.lms.service.BoardService;
 @SuppressWarnings("serial")
 @WebServlet("/board/add")
 public class BoardAddServlet extends HttpServlet {
-  
+
   @Override
   protected void doGet(
       HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/board/form.jsp").include(request, response);
+          throws ServletException, IOException {
+
+    // 뷰 컴포넌트의 URL을 ServletRequest 보관소에 저장한다.
+    request.setAttribute("viewUrl","/board/form.jsp");
   }
-  
+
   @Override
   protected void doPost(
       HttpServletRequest request, HttpServletResponse response)
-      throws ServletException, IOException {
-    
+          throws ServletException, IOException {
+
     // Spring IoC 컨테이너에서 BoardService 객체를 꺼낸다.
     ServletContext sc = this.getServletContext();
     ApplicationContext iocContainer = 
         (ApplicationContext) sc.getAttribute("iocContainer");
     BoardService boardService = iocContainer.getBean(BoardService.class);
-    
+
     Board board = new Board();
     board.setContents(request.getParameter("contents")
         + ":" + request.getRemoteAddr());
-    
+
     boardService.add(board);
-    
-    response.sendRedirect("list");
+
+    // 뷰 컴포넌트의 URL을 ServletRequest 보관소에 저장한다.
+    request.setAttribute("viewUrl","redirect:list");
   }
 }
 

@@ -44,8 +44,8 @@ public class PhotoBoardAddServlet extends HttpServlet {
         iocContainer.getBean(LessonService.class);
     List<Lesson> lessons = lessonService.list();
     request.setAttribute("lessons", lessons);
-    response.setContentType("text/html;charset=UTF-8");
-    request.getRequestDispatcher("/photoboard/form.jsp").include(request, response);
+ // 뷰 컴포넌트의 URL을 ServletRequest 보관소에 저장한다.
+    request.setAttribute("viewUrl","/photoboard/form.jsp");
   }
 
   @Override
@@ -95,7 +95,9 @@ public class PhotoBoardAddServlet extends HttpServlet {
       return;
     }
     
-    request.getRequestDispatcher("/error.jsp").forward(request, response);
+ // 뷰 컴포넌트의 URL을 ServletRequest 보관소에 저장한다.
+    request.setAttribute("viewUrl","redirect:list");
+    
   }
 
 }

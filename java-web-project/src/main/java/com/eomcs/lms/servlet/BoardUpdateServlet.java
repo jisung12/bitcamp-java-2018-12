@@ -18,8 +18,8 @@ public class BoardUpdateServlet extends HttpServlet {
   protected void doPost(
       HttpServletRequest request, 
       HttpServletResponse response)
-      throws ServletException, IOException {
-    
+          throws ServletException, IOException {
+
     ServletContext sc = this.getServletContext();
     ApplicationContext iocContainer = 
         (ApplicationContext) sc.getAttribute("iocContainer");
@@ -28,19 +28,18 @@ public class BoardUpdateServlet extends HttpServlet {
     Board board = new Board();
     board.setNo(Integer.parseInt(request.getParameter("no")));
     board.setContents(request.getParameter("contents"));
-    
+
     if (boardService.update(board) > 0) {
-      response.sendRedirect("list");
+      // 뷰 컴포넌트의 URL을 ServletRequest 보관소에 저장한다.
+      request.setAttribute("viewUrl","redirect:list");
       return;
+    } else {
+      // 오류 내용을 출력하는 JSP로 포워딩한다.
+      request.setAttribute("error.title", "게시물 변경");
+      request.setAttribute("error.content", "해당 번호의 게시물이 없습니다.");
     }
-    
-    // 오류 내용을 출력하는 JSP로 포워딩한다.
-    request.setAttribute("error.title", "게시물 변경");
-    request.setAttribute("error.content", "해당 번호의 게시물이 없습니다.");
-    
-    request.getRequestDispatcher("/error.jsp").forward(request, response);
   }
- 
+
 }
 
 
