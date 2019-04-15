@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @SuppressWarnings("serial")
-@WebServlet("/hello")
+@WebServlet("/hello1")
 public class HelloServlet extends HttpServlet {
   @Override
   protected void doGet(
