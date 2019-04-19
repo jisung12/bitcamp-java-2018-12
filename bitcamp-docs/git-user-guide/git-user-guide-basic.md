@@ -18,6 +18,7 @@
     - 예) CVS, Subversion, Perforce 등
   - 분산 버전 관리 시스템
     - 저장소 전부를 복제한다. 
+    
     - 변경 내력(history)까지 모두 복제한다.
     - 예) Git, Mercurial, Bazaar, Darcs 등
 
@@ -63,9 +64,10 @@ Git 프로젝트는 다음 세 가지 단계로 관리된다.
 
 ### Git 파일의 상태 변화 
 
+
 다음은 Git 명령에 따른 파일의 상태 변화를 보여준다. 
 
-```
+``````
          Working Directory         | Staging Area | .git Directory(Repository)
 [Untracked] [Unmodified] [Modified]|[   Staged   ]|[  Committed  ]    
 -----------------------------------|--------------|---------------------------
