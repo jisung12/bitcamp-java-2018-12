@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>ex06</title>
+</head>
+<body>
+<h1>이벤트 - 프로그래밍으로 이벤트 발생시키기</h1>
+<p>a 태그의 링크를 클릭하면 href에 등록한 URL을 요청하는 것이
+a 태그의 기본 동작이다.</p>
+<a href="http://www.daum.net" onclick="alert('OK!')">다음1</a><br>
+<a href="http://www.daum.net" onclick="alert('OK!'); return false;">다음2</a><br>
+<a href="http://www.daum.net" onclick="return f1()">다음3</a><br>
+<a id="link3" href="http://www.daum.net" onclick="return f1()">다음4</a><br>
+<a id="link4" href="http://www.daum.net" onclick="return f1()">다음5</a><br>
+
+<a id="link5" href="http://www.daum.net" onclick="return f1()">다음6</a><br>
+
+<a id="link6" href="http://www.daum.net" onclick="return f1()">다음7</a><br>
+
+
+<script>
+"use strict"
+
+function f1() {
+  alert("OK!");
+  return false;
+}
+
+document.querySelector("#link3").onclick = function() {
+  alert("OK!");
+  return false;
+}
+
+document.querySelector("#link4").onclick = function(e) {
+  e.preventDefault();
+  alert("OK!");
+}
+
+document.querySelector("#link5").addEventListener("click" , function() {
+  alert("OK!");
+  return false;
+});
+
+document.querySelector("#link5").addEventListener("click" , function(e) {
+  e.preventDefault();
+  alert("OK!");
+});
+</script>
+</body>
+</html>
+
+
+
+
+
