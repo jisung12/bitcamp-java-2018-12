@@ -3,7 +3,7 @@
 ## npm 설정 파일 만들기
 - npm 설정 파일인 "package.json" 파일을 생성한다.
 ```
-> npm init 
+> npm init (/home/bitcamp/git/bitcamp-java-2018-12/java-web/src/main/webapp)
 ```
 
 ## npm으로 의존 라이브러리 가져오기
