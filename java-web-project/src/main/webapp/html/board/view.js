@@ -21,7 +21,7 @@ document.querySelector('#add-btn').onclick = () => {
       return;
     
     var data = JSON.parse(xhr.responseText);
-    
+
     if (data.status == 'success') {
       location.href = "index.html"
         

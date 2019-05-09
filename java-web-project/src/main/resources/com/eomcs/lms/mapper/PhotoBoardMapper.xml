@@ -79,7 +79,7 @@
       l.lesson_id,
       l.titl as lessonTitle,
       l.sdt,
-      l.edt
+      l.edt  
     from 
       lms_photo p
       left outer join lms_lesson l on p.lesson_id = l.lesson_id 
