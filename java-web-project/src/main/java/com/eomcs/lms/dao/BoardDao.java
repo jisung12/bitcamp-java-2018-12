@@ -13,8 +13,8 @@ public interface BoardDao {
   int delete(int no);
   int countAll(); // 0527
 }
-
-
+ 
+ 
 
 
 
