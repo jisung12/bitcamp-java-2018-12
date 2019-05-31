@@ -11,7 +11,7 @@ public interface BoardDao {
   int increaseCount(int no);
   int update(Board board);
   int delete(int no);
-  int countAll(); // 0527
+  int countAll();
 }
  
  
