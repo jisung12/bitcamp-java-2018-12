@@ -35,8 +35,8 @@ $('#fileupload').fileupload({
     add: function (e, data) {
         console.log('add()...');
         data.context = $('<p>').append($('<button>')
-           .text(data.files[0].name + '파일 업로드!')
-           .click(function () {
+          .text(data.files[0].name + ' 파일 업로드')
+          .click(function () {
             data.context.html('업로드중...');
             data.submit();
         })).appendTo('#btnBox');
@@ -44,31 +44,27 @@ $('#fileupload').fileupload({
     done: function (e, data) {
       console.log('done()...');
       console.log(data.result);
-      // 파일 업로드를 완료한 후 p 태그의 콘텐트를 제거한다.
       
       // p 태그에 img 태그를 붙인다.
-      // => 이클립스에서 톰캣 서버를 실행할 때는 서버에서 파일을 저장한 후
+      // => 이클립스에서 톰캣 서버를 실행할 때는 서버에서 파일을 저장한 후 
       //    일정 시간이 지나야만 웹 브라우저에서 해당 이미지를 제대로 출력할 수 있다.
-      // => 그래서 파일 업로드 한 후 일정 시간이 지난 다음에 이미지 태그를 출력하도록 하였다.
- 
+      // => 그래서 파일 업로드 한 후 일정 시간이 지난 다음에 이미지 태그를 출력하도록 하였다. 
       window.setTimeout(function() {
-        
-      data.context.html('');
+        // 파일 업로드를 완료한 후 p 태그의 콘텐트를 제거한다.
+        data.context.html('');
       
-      data.context.append(
-          $('<img>').
-          attr('src', '../upload/' + data.result.files[0].filename)
-           .css('height', '60px'));
-    } , '5000');
-}
+        data.context.append(
+          $('<img>')
+            .attr('src','../upload/' + data.result.files[0].filename)
+            .css('height', '60px'));
+      }, '5000');
+    }
 });
 
 </script>
 
 </body>
 </html>
-
-
 
 
 

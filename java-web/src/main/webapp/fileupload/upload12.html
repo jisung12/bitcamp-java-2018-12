@@ -33,7 +33,7 @@ $('#fileupload').fileupload({
   add: function (e, data) {
     console.log('add()...');
     $.each(data.files, function (index, file) {
-        console.log('Added file: ' + file.name);
+        console.log('선택한 파일: ' + file.name);
     });
     $('#upload-btn').click(function() {
         data.submit(); // submit()을 호출하면, 서버에 데이터를 보내기 전에 submit 이벤트가 발생한다.

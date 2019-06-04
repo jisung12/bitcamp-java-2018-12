@@ -53,11 +53,13 @@ $('#fileupload').fileupload({
       for (var i = 0; i < data.files.length; i++) {
         try {
           if (data.files[i].preview.toDataURL) {
-            $("<img>")
-            .attr('src', data.files[i].preview.toDataURL())
-            .css('width', '100px').appendTo(imagesDiv);
+            console.log(data.files[i].preview.toDataURL());
+            $("<img>").attr('src', data.files[i].preview.toDataURL())
+                      .css('width', '100px')
+                      .appendTo(imagesDiv);
           }
-        } catch (err) {}
+        } catch (err) {
+        }
       }
       $('#upload-btn').unbind("click");
       $('#upload-btn').click(function() {
@@ -86,9 +88,5 @@ $('#fileupload').fileupload({
 
 </body>
 </html>
-
-
-
-
 
 

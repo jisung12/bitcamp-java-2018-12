@@ -27,7 +27,7 @@
 
 <input id="fileupload" type="file" name="files" 
        data-url="upload.jsp" multiple><br>
-
+       
 <hr>
 <p><img id="photoImg" width="100"></p>
 
@@ -43,14 +43,13 @@
 // 아규먼트 값은 자바스크립트 객체에 담아 넘긴다.
 
 $('#fileupload').fileupload({
-  // 서버에 보낸 데이터가 일반 텍스트일 경우
+  // 서버가 보내온 데이터가 일반 텍스트일 경우 
   // 설정 정보에 추가하라.
-  dataType: 'text', 
+  dataType: 'text',
   done: function(e, data) {
     console.log('done()...');
     
-    // data 아규먼트에 result라는 이름으로 서버가 보낸 텍스트가 들어있다.
-    
+    // data 아규먼트에 result 라는 이름으로 서버가 보낸 텍스트가 들어 있다.
     console.log(data.result);
   }
 });
@@ -59,17 +58,6 @@ $('#fileupload').fileupload({
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

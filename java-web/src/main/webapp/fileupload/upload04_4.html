@@ -30,20 +30,21 @@ $('#fileupload').fileupload({
     dataType: 'json',
     add: function (e, data) { // 각 파일에 대해 호출된다.
         console.log('add()...');
-        // 사용자가 선택한 각 파일에 대해 업로드 정보를 출력해보자. 
-        var pTag = $('<p/>').text(data.files[0].name + '업로드중...').appendTo(document.body);
+        // 사용자가 선택한 각 파일에 대해 업로드 정보를 출력해보자.
+        var pTag = $('<p/>').text(data.files[0].name + ' 업로드중...').appendTo(document.body);
         
-        // done() 함수에서 사용할 값이 있다면 data 객체에 context라는 이름으로 보관하라.
+        // done() 함수에서 사용할 값이 있다면 data 객체에 context 라는 이름으로 보관하라.
         data.context = pTag;
         
         data.submit(); // 해당 파일의 서버 전송을 시작한다.
     },
     done: function (e, data) {
       console.log('done()...');
-      console.log(data.context);
-      // data.context에는 add()가 호출될 때 생성한 p 태그가 들어있다.
-      // p 태그의 콘텐트를 변경해보자.
       
+      console.log(data.context);
+      
+      // data.context 에는 add()가 호출될 때 생성한 p 태그가 들어 있다.
+      // p 태그의 콘텐트를 변경해 보자.
       data.context.html('업로드 완료');
       
       console.log(data.result);

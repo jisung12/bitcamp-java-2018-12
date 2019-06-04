@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>test1</title>
+<title>test3</title>
 </head>
 <body>
 <h1>test3.jsp 실행!</h1>
@@ -13,6 +13,15 @@
 <%
 response.setHeader("Access-Control-Allow-Origin", "*");
 
-// 일부러 응답 지연
+// 일부러 응답을 지연시킨다.
 Thread.currentThread().sleep(10000);
 %>
+
+
+
+
+
+
+
+
+

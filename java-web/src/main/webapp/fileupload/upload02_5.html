@@ -27,7 +27,7 @@
 
 <input id="fileupload" type="file" name="files" 
        data-url="upload.jsp" multiple><br>
-
+       
 <hr>
 <p><img id="photoImg" width="100"></p>
 
@@ -43,15 +43,15 @@
 // 아규먼트 값은 자바스크립트 객체에 담아 넘긴다.
 
 $('#fileupload').fileupload({
-  // 서버가 보내온 데이터가 JSON 형식의 텍스트일 경우
+  // 서버가 보내온 데이터가 JSON 형식의 텍스트일 경우 
   // 자바스크립트 객체로 자동 변환할 수 있다.
-  dataType: 'json', 
+  dataType: 'json',
   done: function(e, data) {
     console.log('done()...');
     
-    // data 아규먼트의 result에는 서버가 보낸 JSON 
-    // 텍스트를 자바스크립트 객체로 변환한 것이 들어있다.
-    // 즉 자바스크립트 객체가 들어있다.
+    // data 아규먼트의 result에는 서버가 보낸 JSON 텍스트를 
+    // 자바스크립트 객체로 변환한 것이 들어 있다. 
+    // 즉 자바스크립트 객체가 들어 있다.
     console.log(data.result);
   }
 });
@@ -60,17 +60,6 @@ $('#fileupload').fileupload({
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
 
 
 

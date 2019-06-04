@@ -20,41 +20,56 @@
   파일의 경로처럼 객체에 포함된 객체를 탐색하여 값을 쉽게 조회할 수 있다.
   
 - 문법
-    $ { 객체명.프로퍼티명.프로퍼티명.프로퍼티명 }
-    $ { 객체명["프로퍼티명"]["프로퍼티명"]["프로퍼티명"] }
+    ${ 객체명.프로퍼티명.프로퍼티명.프로퍼티명 }
+    ${ 객체명["프로퍼티명"]["프로퍼티명"]["프로퍼티명"] }
     
 - EL에서 사용할 수 있는 객체?
-    pageContext - JSP의 PageContext 객체
-    servletContext - $ { pageContext.servletContext.프로퍼티명 }
-                     자바코드: pageContext.getServletContext().get프로퍼티()
-    session - $ { pageContext.session.프로퍼티명 }
-              예) $ { pageContext.session.name }
-              => pageContext.getSession().getName();
+    pageContext 
+      - JSP의 PageContext 객체
+    servletContext 
+      - ${ pageContext.servletContext.프로퍼티명 }
+        자바코드 => pageContext.getServletContext().get프로퍼티()
+    session 
+      - ${ pageContext.session.프로퍼티명 }
+        예) $ { pageContext.session.name }
+        => pageContext.getSession().getName();
                     
-    request - $ { pageContext.request.프로퍼티명 }
+    request 
+      - ${ pageContext.request.프로퍼티명 }
     response
-    param - $ { param.파라미터명 }
-            => request.getParameter("파라미터명");
-    paramValues - $ { paramValues.파라미터명 }
-            => request.getParameterValues("파라미터명");
-    header - $ { header.헤더명 }
-            => request.getHeader("헤더명");
-    headerValues - $ { headerValues.헤더명 }
-                   => request.getHeaders("헤더명");
-    cookie - $ { cookie.쿠키명 }
-    initParam - $ { initParam.파라미터명 }
+    
+    param 
+      - ${ param.파라미터명 }
+        => request.getParameter("파라미터명");
+    paramValues 
+      - ${ paramValues.파라미터명 }
+        => request.getParameterValues("파라미터명");
+    header 
+      - ${ header.헤더명 }
+        => request.getHeader("헤더명");
+    headerValues 
+      - ${ headerValues.헤더명 }
+        => request.getHeaders("헤더명");
+    cookie 
+      - ${ cookie.쿠키명 }
+    initParam 
+      - ${ initParam.파라미터명 }
     
     => 보관소에서 값을 꺼내는 문법
-    pageScope - $ { pageScope.객체이름 }
-                => pageContext.getAttribute("객체이름");
-    requestScope - $ { requestScope.객체이름 }
-                => request.getAttribute("객체이름");
-    sessionScope - $ { sessionScope.객체이름 }
-                => session.getAttribute("객체이름");
-                예) $ { sessionScope.name }
-                => session.getAttribute("name");
-    applicationScope - $ { applicationScope.객체이름 }
-                => application.getAttribute("객체이름");
+    pageScope 
+      - ${ pageScope.객체이름 }
+        => pageContext.getAttribute("객체이름");
+    requestScope 
+      - ${ requestScope.객체이름 }
+        => request.getAttribute("객체이름");
+    sessionScope 
+      - ${ sessionScope.객체이름 }
+        => session.getAttribute("객체이름");
+        예) ${ sessionScope.name }
+        => session.getAttribute("name");
+    applicationScope 
+      - ${ applicationScope.객체이름 }
+        => application.getAttribute("객체이름");
 --%>
 
 </body>
