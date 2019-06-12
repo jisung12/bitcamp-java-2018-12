@@ -1,5 +1,7 @@
 package com.eomcs.lms.web.json;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.eomcs.lms.domain.Member;
+import com.eomcs.lms.service.FacebookService;
 import com.eomcs.lms.service.MemberService;
 
 @RestController("json/AuthController")
@@ -23,6 +26,7 @@ public class AuthController {
   static final String REFERER_URL = "refererUrl";
 
   @Autowired MemberService memberService;
+  @Autowired FacebookService facebookService;
   @Autowired ServletContext servletContext;
   
   @GetMapping("form")
@@ -61,6 +65,8 @@ public class AuthController {
     return content;
   }
   
+  
+  
   @GetMapping("logout")
   public Object logout(HttpSession session) throws Exception {
     
@@ -87,6 +93,36 @@ public class AuthController {
     } else {
       content.put("status", "fail");
     }
+    return content;
+  }
+  
+  
+  @GetMapping("fblogin")
+  public Object fblogin(
+      String accessToken,
+      HttpSession session,
+      HttpServletResponse response) {
+
+    Map fbLoginUser = facebookService.getLoginUser(accessToken);
+    
+    Member member = memberService.get((String)fbLoginUser.get("email"));
+    
+    if (member == null) {
+      member = new Member();
+      member.setEmail((String)fbLoginUser.get("email"));
+      member.setName((String)fbLoginUser.get("name"));
+      member.setPassword(UUID.randomUUID().toString());
+
+      // 소셜 사용자 정보를 DBMS에 등록한다.
+      memberService.add(member);
+    }
+    
+    session.setAttribute("loginUser", member);
+    
+    HashMap<String,Object> content = new HashMap<>();
+    content.put("status", "success");
+    content.put("member", member);
+
     return content;
   }
 }

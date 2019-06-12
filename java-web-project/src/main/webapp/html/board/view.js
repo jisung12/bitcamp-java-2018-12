@@ -14,7 +14,7 @@ if (param) {
   }
 }
 
-document.querySelector('#add-btn').onclick = () => {
+ $('#add-btn').click(() => {
   var xhr = new XMLHttpRequest()
   xhr.onreadystatechange = function() {
     if (xhr.readyState != 4 || xhr.status != 200)
@@ -35,7 +35,7 @@ document.querySelector('#add-btn').onclick = () => {
   var contents = document.querySelector('#contents').value;
   
   xhr.send("contents=" + encodeURIComponent(contents));
-};
+});
 
 document.querySelector('#delete-btn').onclick = () => {
   var xhr = new XMLHttpRequest()

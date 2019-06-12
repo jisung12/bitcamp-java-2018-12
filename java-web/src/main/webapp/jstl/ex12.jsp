@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>JSTL fmt:parseDate</title>
+<title>JSTL</title>
 </head>
 <body>
 <h1>JSTL - fmt:parseDate</h1>

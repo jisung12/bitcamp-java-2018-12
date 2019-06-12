@@ -30,7 +30,11 @@ document.querySelector("#btn1").onclick = () => {
         "Content-Type", 
         "application/x-www-form-urlencoded");
     
-    xhr.send("name=" + window.encodeURIComponent("홍길동") + "&age=20");
+    var data = "name=" + window.encodeURIComponent("홍길동") + "&age=20";
+    console.log(data);
+    
+    xhr.send(data);
+    
     ta.value = xhr.responseText;
 };
 

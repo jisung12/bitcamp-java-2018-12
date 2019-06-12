@@ -11,10 +11,10 @@ public interface BoardDao {
   int increaseCount(int no);
   int update(Board board);
   int delete(int no);
-  int countAll();
+  int countAll();  
 }
-
-
+ 
+ 
 
 
 

@@ -9,5 +9,5 @@ public interface BoardService {
   Board get(int no);
   int update(Board board);
   int delete(int no);
-  int size();
+  int size();  
 }
